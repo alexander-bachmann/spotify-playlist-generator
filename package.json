@@ -1,0 +1,25 @@
+{
+  "name": "capstone-playlist-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexander-bachmann/capstone-playlist-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexander-bachmann/capstone-playlist-generator/issues"
+  },
+  "homepage": "https://github.com/alexander-bachmann/capstone-playlist-generator#readme",
+  "dependencies": {
+    "@types/express": "^4.17.8",
+    "express": "^4.17.1",
+    "typescript": "^4.0.2"
+  }
+}
