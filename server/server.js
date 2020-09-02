@@ -5,10 +5,10 @@
 - updated package.json by adding "tsc" : "tsc" to scripts tag
 - initialize typescript project : npx tsc --init
 - install express : npm install express @types/express
-
 - compile code : npm run tsc
 - run the app : node server/server.js
 
+go to localhost:3000 in your browser
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
