@@ -1,6 +1,6 @@
 /*
 - create new project : npm init
-- install typescript package : npm install typescript
+- install typescript package : npm install -D typescript
 - updated package.json by adding "tsc" : "tsc" to scripts tag
 - initialize typescript project : npx tsc --init
 - install express : npm install express @types/express
@@ -8,6 +8,9 @@
 - run the app : node server/server.js
 
 go to localhost:3000 in your browser
+
+
+ npm install --save react react-dom
 */
 
 import express = require('express');
