@@ -7,6 +7,7 @@ type HeaderProps = {
 
 //use PascalCasing for components, pass in arguments via props
 function Header(props: HeaderProps) {
+    //props.text = "don't do this"; 
     return (
         <h1 className="primary-header">{props.text}</h1>
     )
