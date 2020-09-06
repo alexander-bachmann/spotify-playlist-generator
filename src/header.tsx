@@ -7,11 +7,22 @@ type HeaderProps = {
 
 //use PascalCasing for components, pass in arguments via props
 function Header(props: HeaderProps) {
-    //props.text = "don't do this"; 
+    
+    //useEffect() - function passed to useEffect will run after the render
+    //is committed to the screen
+    /*
+    React.useEffect(() => {
+        alert(document.querySelector('#myHeader'));
+    })
+    */ 
+
     return (
-        <h1 className="primary-header">{props.text}</h1>
+        <h1 id="myHeader" className="primary-header">{props.text}</h1>
     )
 }
+
+//to be able to see it in the react chrome extension
+Header.displayName = "Header";
 
 export {
     Header

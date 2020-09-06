@@ -15,6 +15,8 @@ function CustomTime() {
     )
 }
 
+CustomTime.displayName = "CustomTime";
+
 export {
     CustomTime
 }

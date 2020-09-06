@@ -1,22 +1,22 @@
 import * as React from 'react';
 
-function FruitLoops() {
-    let fruit: Array<string> = [
-        "red",
-        "green",
-        "blue",
-        "yellow"
-    ]
+type FruitLoopsProps = {
+    fruit: Array<string>
+}
 
+//using props allows us to separate out data from components
+function FruitLoops(props: FruitLoopsProps) {
     return (
         <ul>
-            {fruit.map((value, index) => {
+            {props.fruit.map((value, index) => {
                 //if it were an object, it'd be value.title or something like that
-                return <li key={index}>{value}</li>
+                return <li key={index} style={{ color: value }}>{value}</li>
             })}
         </ul>
     )
 }
+
+FruitLoops.displayName = "FruitLoops";
 
 export {
     FruitLoops

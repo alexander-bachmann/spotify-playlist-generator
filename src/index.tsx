@@ -6,12 +6,22 @@ import * as ReactDom from 'react-dom';
 import { Header } from './header';
 import { CustomTime } from './custom-date'
 import { FruitLoops } from './fruit-loops'
-//typically only ever call ReactDom.render() one time
+
+
+let fruit: Array<string> = [
+    "red",
+    "green",
+    "blue",
+    "yellow",
+    "pink"
+]
+
+//typically only ever call ReactDom.render() one time, like the main() function in java/c++
 ReactDom.render(
     <div>
         <Header text="Whaaaduup"/>
         <CustomTime />
-        <FruitLoops /> 
+        <FruitLoops fruit={fruit} /> 
         <h1>Playlist Generator</h1>
         <p>sanotehuaosentuhaoesnuth</p>
     </div>, 
