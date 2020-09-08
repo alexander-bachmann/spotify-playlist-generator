@@ -1,12 +1,12 @@
 # capstone-playlist-generator
 
-install dependencies:
+Install dependencies:
 ```
 $ npm install
 ```
-compile/build:
+Compile / Build:
 ```
 $ npm run build
 ```
-view: 
+View webpage: 
 open index.html in browser or use 'Live Server' plugin in VSCode
