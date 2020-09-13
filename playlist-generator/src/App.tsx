@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 import TrackData from './trackdata'
-import AuthorizeButton from './authorize'
+import SpotifyButton from './spotifyButton'
 
 function App() {
   return (
     <div className="App">
         
         <div className="App-header">
-            <AuthorizeButton />
+            <SpotifyButton />
             <TrackData  endpointURL='https://api.spotify.com/v1/recommendations?'/>
         </div>
 
