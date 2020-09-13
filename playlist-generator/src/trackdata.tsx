@@ -11,7 +11,7 @@ function TrackData(props: TrackDataProps) {
     async function fetchData(endpointURL: string) {
 
         // TODO this token will expire which is why we need to use OAuth
-        let userToken: string = 'BQCij9ZYV9Xl-s4SbL8_rS8LYkKa2tHNN4TQfGczOo8UnamOi0vGl_eMlP9rMedgPO1S6PGBTEgoF2_bx3VgmogFy7zthEY4cWAJo9d515ULk6LMAa6dn5CK40xcxa39JcdWspZe7WL5D7WiJSytE-d8NIMd0_U-LGSrEONrROa_lNb-WDiGf5HGxofM-6whe7n9KO3j3YDtbJQFlT0hMDezxKwscEEODSAgNDkfqCF-l8SjQ6ABVKWDASQdIPPLaXUvlWagpIQu';
+        let userToken: string = "BQCWpYMGJds-0kEnNzPMrDr-YiJwgvplc2y9iAmpfyZGMSgi-b1YEDgNR6zVzV4_DvVBhOjJgbLrvrFS1qiDSYMNUBFR83268o42OrjXnA3SUbzgaMIAxh4NYzSfJkMBpTjNHOojfkDk1vYfqxjjcjwss2z_CjLE6bv9k3eIKkB5Yr8c16VJx5hy3jmXT9baamRE0SwV5OcTllcyWh02iuvDLKSvXyjw9UchH7XE8HOupwNlvxTfgdVbGkQoMWDVZnBEI6AaGknb";
         let artistURI: string = '4frXpPxQQZwbCu3eTGnZEw';
         let limit: number = 1;
         let market: string = 'US';
