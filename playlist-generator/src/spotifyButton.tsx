@@ -4,6 +4,8 @@ import { SpotifyAuth, Scopes } from 'react-spotify-auth'
 import Cookies from 'js-cookie'
 import 'react-spotify-auth/dist/index.css'
 
+import TrackData from './trackdata'
+
 function SpotifyButton() {
 
     const token = Cookies.get('spotifyAuthToken');
@@ -13,6 +15,7 @@ function SpotifyButton() {
         {token ? (
             <SpotifyApiContext.Provider value={token}>
             {/* Your Spotify Code here */}
+                <TrackData  endpointURL='https://api.spotify.com/v1/recommendations?'/>
             <p>You are authorized with token: {token}</p>
             </SpotifyApiContext.Provider>
         ) : (

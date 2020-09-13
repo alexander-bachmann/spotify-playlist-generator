@@ -43,7 +43,6 @@ function TrackData(props: TrackDataProps) {
             <br />
             <hr />
             <div>{JSON.stringify(tracks, null, '\t')}</div>
-            {/* <div>{tracks[0].stringify()}</div> */}
             <hr />
             <span>Has error: {JSON.stringify(hasError)}</span>
         </div>

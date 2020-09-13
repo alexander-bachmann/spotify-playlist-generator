@@ -9,7 +9,6 @@ function App() {
         
         <div className="App-header">
             <SpotifyButton />
-            <TrackData  endpointURL='https://api.spotify.com/v1/recommendations?'/>
         </div>
 
     </div>
