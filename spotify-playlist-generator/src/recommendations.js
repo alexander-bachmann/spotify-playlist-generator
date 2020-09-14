@@ -8,11 +8,10 @@ function Recommendations(props) {
         <SpotifyApiContext.Provider value={token}>
             <BrowseRecommendations
                 options={{
-                    seed_artists:
-                        props.artistURI,
+                    seed_artists: props.artistURI,
                     limit: props.limit
                 }}>
-                { (recommendations, loading, error) => (
+                {(recommendations, loading, error) => (
                     recommendations ? (
                         recommendations.tracks.map(track => (
                             <p key={track.id}>{track.artists[0].name} - {track.name}</p>
