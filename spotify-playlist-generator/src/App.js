@@ -10,9 +10,9 @@ function App() {
         <div className="App">
             <div className="App-header">
                 <SignInButton />
-                {/* TODO, make it so an object prop for query params is passed in */}
-                {/* <CallAPI endpointURL='https://api.spotify.com/v1/recommendations?' /> */}
-                <Recommendations />
+                <Recommendations 
+                    artistURI='4frXpPxQQZwbCu3eTGnZEw' 
+                    limit='5'/>
             </div>
         </div>
   );
