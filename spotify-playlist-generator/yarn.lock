@@ -8673,10 +8673,10 @@ react-scripts@3.4.3:
   optionalDependencies:
     fsevents "2.1.2"
 
-react-spotify-api@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-spotify-api/-/react-spotify-api-3.0.0.tgz#7a8d92ce76267fa757e2ea51321c0d60b25f7bf0"
-  integrity sha512-q7X/fIBRVpx1iZfPocDl7Q7qv8nU+MFpMqQMMEcveQD9wQ8DWnDeSbkbiH9TW7NlyOc+G4IpuZ/9jk5Z306Itw==
+react-spotify-api@2.6:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/react-spotify-api/-/react-spotify-api-2.6.0.tgz#7b81b5352231787b75d732c59705afe3193f3dac"
+  integrity sha512-zS7rShZUn6udd0OICX8YIG5wtrqjfmY6yvQgjp2FYr26t3MjF2BCpwnm2XNo8yI8GuRc/cKEa/bx8Ag1DjaY8w==
 
 react-spotify-auth@^1.1.0:
   version "1.1.0"

@@ -10,7 +10,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "react-spotify-api": "^3.0.0",
+    "react-spotify-api": "2.6",
     "react-spotify-auth": "^1.1.0"
   },
   "scripts": {
