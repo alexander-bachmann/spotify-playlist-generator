@@ -2,8 +2,7 @@ import React from 'react';
 import './App.css';
 import SignInButton from './signInButton';
 import Recommendations from './recommendations';
-
-import CallAPI from './callAPI';
+import RecommendedTracks from './recommendedTracks';
 
 function App() {
     return (
@@ -13,9 +12,11 @@ function App() {
                 <Recommendations 
                     artistURI='4frXpPxQQZwbCu3eTGnZEw' 
                     limit='5'/>
+                
+                <RecommendedTracks />
             </div>
         </div>
-  );
+    );
 }
 
 export default App;

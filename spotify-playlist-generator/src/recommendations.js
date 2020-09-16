@@ -14,9 +14,11 @@ function Recommendations(props) {
                 {(recommendations, loading, error) => (
                     recommendations ? (
                         recommendations.tracks.map(track => (
-                            <p key={track.id}>{track.artists[0].name} - {track.name}</p>
+                            <p key={track.id}>
+                                {track.artists[0].name} - {track.name}                            
+                            </p>
                         ))
-                    ) : <p>no recommendations</p> 
+                    ) : null 
                 )
                 }
             </BrowseRecommendations> 
