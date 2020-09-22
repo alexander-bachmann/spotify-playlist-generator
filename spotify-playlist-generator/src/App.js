@@ -9,12 +9,11 @@ function App() {
     return (
         <div className="App">
             <div className="App-header">
-                <PlaylistBuilder />
                 <SignInButton />
+                <PlaylistBuilder />
                 <Recommendations 
                     artistURI='4frXpPxQQZwbCu3eTGnZEw' 
                     limit='5'/>
-                
                 <RecommendedTracks />
 
             </div>

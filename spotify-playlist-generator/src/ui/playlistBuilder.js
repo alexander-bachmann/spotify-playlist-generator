@@ -1,15 +1,14 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
 import TextInputField from './textInputField';
+import NewTrack from './newTrack';
 
 function PlaylistBuilder(props) {
     return (
         /* 
             PlaylistBuilder
 
-                InputBox (playlist title) - props: default text
-                InputBox (artist spotify uri) - props: default text
+                InputBox (playlist title) - props: defaultText
+                InputBox (artist spotify uri) - props: defaultText
 
                 ConfiguredTrack
                     Track Name (default until filled with title)
@@ -34,6 +33,9 @@ function PlaylistBuilder(props) {
 
             <TextInputField defaultText="Playlist Title"/>
             <TextInputField defaultText="Artist Spotify URI"/>
+
+
+            <NewTrack defaultTrackName="Track 1"/>
 
 
         </div>
