@@ -1,6 +1,7 @@
 import React from 'react';
 import TextInputField from './textInputField';
 import NewTrack from './newTrack';
+import ConfiguredTrack from './configuredTrack';
 
 function PlaylistBuilder(props) {
     return (
@@ -13,18 +14,20 @@ function PlaylistBuilder(props) {
                 * InputBox (artist spotify uri) - props: defaultText
 
                 ConfiguredTrack
-                    Track Name (default until filled with title)
-                    Settings Button
-                    Trash Button
+                    * Track Name (default until filled with title)
+                    * Settings Button
+                    * Trash Button
 
-                * NewTrack 
+                * NewTrack  (will also be called when user selects settings cog)
+                    * Track title
+                    * Add Button (this button will generate a new Configured track component)
+                    * Reset Button
                     * Features
                         * Feature
                             * Name    
                             * Slider
                             * Toggle Switch
-                    Add Button (this button will generate a new component)
-                    Reset Button
+
 
                 Build Button
 
@@ -36,8 +39,11 @@ function PlaylistBuilder(props) {
             <TextInputField defaultText="Playlist Title"/>
             <TextInputField defaultText="Artist Spotify URI"/>
 
+            <ConfiguredTrack trackTitle="Track 1"/>
+            <ConfiguredTrack trackTitle="Track 2"/>
+            <ConfiguredTrack trackTitle="Track 3"/>
 
-            <NewTrack trackTitle="Track 1"/>
+            <NewTrack trackTitle="Track 4"/>
 
 
         </div>

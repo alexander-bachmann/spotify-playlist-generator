@@ -36,23 +36,21 @@ const useStyles = makeStyles({
 function NewTrack(props) {
     const classes = useStyles();
 
-    // TODO will need to add 'listeners' for when buttons are pressed
+    // TODO will need to add 'listener' functions for when buttons are pressed
 
     return (
         <div>
             <div className={classes.root}>
                 <span className={classes.trackTitle}>{props.trackTitle}</span>
-
+                
                 <IconButton 
                     className={classes.resetButton}
-                    variant="contained"
                     size="small"
                     aria-label="clear"
                 ><ClearIcon/></IconButton>
                
                 <IconButton 
                     className={classes.addButton}
-                    variant="contained"
                     size="small"
                     aria-label="add"
                 ><AddIcon/></IconButton>
