@@ -1,51 +1,63 @@
 import React, { useState, useEffect }from 'react';
 import Features from './features';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const useStyles = makeStyles({
     root: {
-        margin: '1ch',
-    },
-    onSwitch: {
-        background: '#FE6B8B',
-        borderRadius: 50,
+        // margin: '1ch',
+        padding: '3rem 0rem'
     },
     addButton: {
         color: 'white',
-        backgroundColor: '#555555',
         float: 'right',
+        backgroundColor: '#555555',
+        '&:hover': {
+            backgroundColor: "#77DD77",
+        },
     },
     resetButton: {
         color: 'white',
+        float: 'right',
         backgroundColor: '#555555',
-        float: 'right'
+        '&:hover': {
+            backgroundColor: "#FE6B8B",
+        },
     },
-
     trackTitle: {
-        float: 'left'
+        float: 'left',
+        fontSize: '1.2rem',
+        fontWeight: '700'
     }
-
 });
 
 function NewTrack(props) {
     const classes = useStyles();
 
+    // TODO will need to add 'listeners' for when buttons are pressed
+
     return (
-        <div className={classes.root}>
-            {/* <span className={classes.trackTitle}>{props.trackTitle}</span>
+        <div>
+            <div className={classes.root}>
+                <span className={classes.trackTitle}>{props.trackTitle}</span>
 
-            <Button 
-                className={classes.resetButton}
-                variant="contained"
-                size="small"
-            >reset</Button>
-           <Button 
-                className={classes.addButton}
-                variant="contained"
-                size="small"
-            >add</Button> */}
-
+                <IconButton 
+                    className={classes.resetButton}
+                    variant="contained"
+                    size="small"
+                    aria-label="clear"
+                ><ClearIcon/></IconButton>
+               
+                <IconButton 
+                    className={classes.addButton}
+                    variant="contained"
+                    size="small"
+                    aria-label="add"
+                ><AddIcon/></IconButton>
+            </div>
+            
             <Features />
         </div>
     )
