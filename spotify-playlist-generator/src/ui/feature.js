@@ -8,10 +8,21 @@ const useStyles = makeStyles({
         margin: '.5rem',
         width: 350
     },
+    switchBase: {
+        color: '#222222',
+        "&$checked": {
+        color: '#FFFFFF' 
+        },
+        "&$checked + $track": {
+        backgroundColor: '#FFFFFF'
+        }
+    },
+    checked: {},
+    track: {}, 
     onSwitch: {
         background: '#FE6B8B',
         borderRadius: 50,
-        float: 'right'
+        float: 'right',
     },
     valueSlider: {
         color: '#FE6B8B',
@@ -43,15 +54,22 @@ function Feature(props) {
 
     return (
         <div className={classes.root}>
+            <span className={classes.featureTitle}>{props.defaultName}</span>
+            
             <Switch 
+                color="primary"
                 checked={checked} 
                 onChange={toggleChecked} 
                 className={classes.onSwitch}
+                classes={{
+                    switchBase: classes.switchBase,
+                    thumb: classes.thumb,
+                    track: classes.track,
+                    checked: classes.checked
+                }} 
                 InputProps={{
                     className: classes.onSwitch
                 }} />
-
-            <span className={classes.featureTitle}>{props.defaultName}</span>
 
             <Slider
                 value={value}
@@ -64,7 +82,6 @@ function Feature(props) {
                     className: classes.valueSlider
                 }}
             />
-            
         </div>
     )
 }
