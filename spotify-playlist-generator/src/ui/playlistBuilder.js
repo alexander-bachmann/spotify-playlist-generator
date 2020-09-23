@@ -3,6 +3,7 @@ import TextInputField from './textInputField';
 import NewTrack from './newTrack';
 import ConfiguredTrack from './configuredTrack';
 import ConfiguredTracks from './configuredTracks';
+import nextId from "react-id-generator";
  /*
         TODO probably need to add states for everything that may change such as titles 
         
@@ -36,10 +37,35 @@ import ConfiguredTracks from './configuredTracks';
 function PlaylistBuilder(props) {
     const [tracks, setTracks] = useState([]);
     const [count, setCount] = useState(1);
+    let UID;
     
     function appendConfiguredTrack(trackTitle) {
+        UID = nextId();
         setCount(count + 1);
-        setTracks( tracks => [...tracks, <ConfiguredTrack trackTitle={trackTitle}/>]);
+        setTracks( tracks => [...tracks, 
+            <ConfiguredTrack 
+                trackTitle={trackTitle}
+                deleteConfiguredTrack={deleteConfiguredTrack}
+                UID={UID} 
+            />]);
+    }
+
+    function deleteConfiguredTrack(trackUID) {
+        
+        // setTracks(tracks.filter(track => track.uid !== trackUID));
+        //DEBUGGING --trying to get these two values to match
+        setTracks(tracks.filter(track => {
+            console.log(track.UID);
+            console.log(trackUID);
+            // track.uid !== trackUID
+        }));
+        
+        // console.log(tracks[0].uid); 
+        // console.log(trackUID); 
+        console.log('deleting track');
+        // setTracks(tracks.filter((track) => (track.UID != trackUID)));
+        // setTracks(tracks.filter((track) => (track != trackUID)));
+        // setTracks( tracks => [...tracks, tracks.splice(i)]);
     }
 
     return (
@@ -47,9 +73,14 @@ function PlaylistBuilder(props) {
             <TextInputField defaultText="Playlist Title"/>
             <TextInputField defaultText="Artist Spotify URI"/>
 
-            <ConfiguredTracks tracks={tracks}/>
+            <ConfiguredTracks 
+                tracks={tracks}
+            />
 
-            <NewTrack trackTitle={"Track " + count} appendConfiguredTrack={appendConfiguredTrack}/>
+            <NewTrack 
+                trackTitle={"Track " + count} 
+                appendConfiguredTrack={appendConfiguredTrack}
+            />
 
 
         </div>

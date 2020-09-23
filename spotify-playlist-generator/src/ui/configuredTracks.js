@@ -1,12 +1,10 @@
-import React, { useState, useEffect }from 'react';
+import React from 'react';
 
 function ConfiguredTracks(props) {
     return(
         <div>
-            <div>
-                {props.tracks.map(track => <div key={track}> {track} </div>)}
-            </div>
-
+            {props.tracks.map((track, index) => 
+                <div key={index}> {track} </div>)}
         </div>
     )
 }
