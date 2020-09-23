@@ -63,7 +63,7 @@ function NewTrack(props) {
                     className={classes.addButton}
                     size="small"
                     aria-label="add"
-                    onClick={addTrack}
+                    onClick={() => {props.appendConfiguredTrack(props.trackTitle)}}
                 ><AddIcon/></IconButton>
             </div>
             

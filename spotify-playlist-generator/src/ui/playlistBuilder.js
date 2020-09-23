@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect }from 'react';
 import TextInputField from './textInputField';
 import NewTrack from './newTrack';
 import ConfiguredTrack from './configuredTrack';
 import ConfiguredTracks from './configuredTracks';
-
-function PlaylistBuilder(props) {
-    return (
-        /*
+ /*
         TODO probably need to add states for everything that may change such as titles 
         
             PlaylistBuilder
@@ -35,18 +32,24 @@ function PlaylistBuilder(props) {
                 Save Playlist Button
         */
 
-        <div>
 
+function PlaylistBuilder(props) {
+    const [tracks, setTracks] = useState([]);
+    const [count, setCount] = useState(1);
+    
+    function appendConfiguredTrack(trackTitle) {
+        setCount(count + 1);
+        setTracks( tracks => [...tracks, <ConfiguredTrack trackTitle={trackTitle}/>]);
+    }
+
+    return (
+        <div>
             <TextInputField defaultText="Playlist Title"/>
             <TextInputField defaultText="Artist Spotify URI"/>
 
-            <ConfiguredTracks />
+            <ConfiguredTracks tracks={tracks}/>
 
-            {/* <ConfiguredTrack trackTitle="Track 1"/>
-            <ConfiguredTrack trackTitle="Track 2"/>
-            <ConfiguredTrack trackTitle="Track 3"/> */}
-
-            <NewTrack trackTitle="Track 4"/>
+            <NewTrack trackTitle={"Track " + count} appendConfiguredTrack={appendConfiguredTrack}/>
 
 
         </div>
