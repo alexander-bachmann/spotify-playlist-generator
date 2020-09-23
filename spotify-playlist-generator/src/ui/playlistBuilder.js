@@ -4,23 +4,25 @@ import NewTrack from './newTrack';
 
 function PlaylistBuilder(props) {
     return (
-        /* 
+        /*
+        TODO probably need to add states for everything that may change such as titles 
+        
             PlaylistBuilder
 
-                InputBox (playlist title) - props: defaultText
-                InputBox (artist spotify uri) - props: defaultText
+                * InputBox (playlist title) - props: defaultText
+                * InputBox (artist spotify uri) - props: defaultText
 
                 ConfiguredTrack
                     Track Name (default until filled with title)
                     Settings Button
                     Trash Button
 
-                NewTrack 
-                    Features
-                        Feature
-                            Name    
-                            Slider
-                            Toggle Switch
+                * NewTrack 
+                    * Features
+                        * Feature
+                            * Name    
+                            * Slider
+                            * Toggle Switch
                     Add Button (this button will generate a new component)
                     Reset Button
 
@@ -35,7 +37,7 @@ function PlaylistBuilder(props) {
             <TextInputField defaultText="Artist Spotify URI"/>
 
 
-            <NewTrack defaultTrackName="Track 1"/>
+            <NewTrack trackTitle="Track 1"/>
 
 
         </div>

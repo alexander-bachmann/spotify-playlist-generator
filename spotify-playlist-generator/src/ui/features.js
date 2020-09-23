@@ -1,10 +1,9 @@
 import React from 'react';
 import Feature from './feature';
-import Box from '@material-ui/core/Box';
 
 function Features() {
     return (
-        <Box>
+        <div>
             {/* TODO will also need to pass the slider min and max values */}
             <Feature defaultName='Instrumentalness' min='0' max='100'/>
             {/* TODO time signature cannot be a range  */}
@@ -21,7 +20,7 @@ function Features() {
             {/* TODO mode and key cannot be a range */}
             <Feature defaultName='Mode' min='0' max='1'/>
             <Feature defaultName='Key' min='0' max='11'/>
-        </Box>
+        </div>
     )
 }
 

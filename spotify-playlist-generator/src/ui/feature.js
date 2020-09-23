@@ -41,8 +41,6 @@ function Feature(props) {
     const classes = useStyles();
     const [checked, setChecked] = useState(false);
     const [value, setValue] = useState([props.min, props.max]);
-    let min = value[0];
-    let max = value[1];
 
     const toggleChecked = () => {
         // console.log(checked);
