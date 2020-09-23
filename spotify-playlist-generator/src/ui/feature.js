@@ -73,6 +73,7 @@ function Feature(props) {
 
             <Slider
                 value={value}
+                disabled={!checked}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
