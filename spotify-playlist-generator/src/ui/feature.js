@@ -1,23 +1,25 @@
 import React, { useState, useEffect }from 'react';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
-import Typography from '@material-ui/core/Typography';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles({
     root: {
-        // margin: '1ch'
-        // padding: '.1em 1.8em',
-        width: 200
+        margin: '.5rem',
+        width: 350
     },
     onSwitch: {
         background: '#FE6B8B',
         borderRadius: 50,
+        float: 'right'
     },
     valueSlider: {
         color: '#FE6B8B',
-    } 
+    },
+    featureTitle: {
+        float: 'left',
+        fontSize: '1.2rem'
+    }
 });
 
 function valuetext(value) {
@@ -30,29 +32,26 @@ function Feature(props) {
     const [value, setValue] = useState([props.min, props.max]);
 
     const toggleChecked = () => {
+        // console.log(checked);
         setChecked((prev) => !prev);
     };
 
     const handleChange = (event, newValue) => {
+        // console.log(value);
         setValue(newValue);
     };
 
     return (
-        <div>
-            <FormControlLabel
-                className={classes.root}
-                control={
-                    <Switch 
-                        checked={checked} 
-                        onChange={toggleChecked} 
-                        className={classes.onSwitch}
-                        InputProps={{
-                            className: classes.onSwitch
-                        }}
-                    />}
-            />
+        <div className={classes.root}>
+            <Switch 
+                checked={checked} 
+                onChange={toggleChecked} 
+                className={classes.onSwitch}
+                InputProps={{
+                    className: classes.onSwitch
+                }} />
 
-            <span>{props.defaultName}</span>
+            <span className={classes.featureTitle}>{props.defaultName}</span>
 
             <Slider
                 value={value}
