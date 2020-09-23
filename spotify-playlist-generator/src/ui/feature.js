@@ -40,7 +40,18 @@ function valuetext(value) {
 function Feature(props) {
     const classes = useStyles();
     const [checked, setChecked] = useState(false);
-    const [value, setValue] = useState([props.min, props.max]);
+
+    let values = [];
+
+    if(props.nodes == '1') {
+        values[0] = props.min;
+    }
+    else {
+        values[0] = props.min;
+        values[1] = props.max;
+    }
+    
+    const [value, setValue] = useState(values);
 
     const toggleChecked = () => {
         // console.log(checked);
