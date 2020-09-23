@@ -33,6 +33,15 @@ const useStyles = makeStyles({
     }
 });
 
+//may not need to do this.. pass function as a prop
+function addTrack() {
+    console.log('track added');
+}
+
+function clearTrack() {
+    console.log('track cleared');
+}
+
 function NewTrack(props) {
     const classes = useStyles();
 
@@ -47,12 +56,14 @@ function NewTrack(props) {
                     className={classes.resetButton}
                     size="small"
                     aria-label="clear"
+                    onClick={clearTrack}
                 ><ClearIcon/></IconButton>
                
                 <IconButton 
                     className={classes.addButton}
                     size="small"
                     aria-label="add"
+                    onClick={addTrack}
                 ><AddIcon/></IconButton>
             </div>
             

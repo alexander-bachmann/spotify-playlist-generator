@@ -2,6 +2,7 @@ import React from 'react';
 import TextInputField from './textInputField';
 import NewTrack from './newTrack';
 import ConfiguredTrack from './configuredTrack';
+import ConfiguredTracks from './configuredTracks';
 
 function PlaylistBuilder(props) {
     return (
@@ -39,9 +40,11 @@ function PlaylistBuilder(props) {
             <TextInputField defaultText="Playlist Title"/>
             <TextInputField defaultText="Artist Spotify URI"/>
 
-            <ConfiguredTrack trackTitle="Track 1"/>
+            <ConfiguredTracks />
+
+            {/* <ConfiguredTrack trackTitle="Track 1"/>
             <ConfiguredTrack trackTitle="Track 2"/>
-            <ConfiguredTrack trackTitle="Track 3"/>
+            <ConfiguredTrack trackTitle="Track 3"/> */}
 
             <NewTrack trackTitle="Track 4"/>
 
