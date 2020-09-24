@@ -33,19 +33,16 @@ const useStyles = makeStyles({
     }
 });
 
-//may not need to do this.. pass function as a prop
-function addTrack() {
-    console.log('track added');
-}
-
-function clearTrack() {
-    console.log('track cleared');
-}
-
-function NewTrack(props) {
+function TrackConfiguration(props) {
     const classes = useStyles();
 
-    // TODO will need to add 'listener' functions for when buttons are pressed
+    function addTrack() {
+        props.appendConfiguredTrack(props.trackTitle)
+    }
+
+    function clearTrack() {
+        console.log('track cleared');
+    }   
 
     return (
         <div>
@@ -63,7 +60,8 @@ function NewTrack(props) {
                     className={classes.addButton}
                     size="small"
                     aria-label="add"
-                    onClick={() => {props.appendConfiguredTrack(props.trackTitle)}}
+                    onClick={addTrack}
+                    
                 ><AddIcon/></IconButton>
             </div>
             
@@ -72,4 +70,4 @@ function NewTrack(props) {
     )
 }
 
-export default NewTrack;
+export default TrackConfiguration;

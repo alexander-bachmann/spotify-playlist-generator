@@ -1,6 +1,6 @@
 import React, { useState, useEffect }from 'react';
 import TextInputField from './textInputField';
-import NewTrack from './newTrack';
+import TrackConfiguration from './trackConfiguration';
 import ConfiguredTrack from './configuredTrack';
 import ConfiguredTracks from './configuredTracks';
 import nextId from "react-id-generator";
@@ -17,7 +17,7 @@ import nextId from "react-id-generator";
                     * Settings Button
                     * Trash Button
 
-                * NewTrack  (will also be called when user selects settings cog)
+                * TrackConfiguration  (will also be called when user selects settings cog)
                     * Track title
                     * Add Button (this button will generate a new Configured track component)
                     * Reset Button
@@ -35,12 +35,12 @@ import nextId from "react-id-generator";
 
 
 function PlaylistBuilder(props) {
+    const [count, setCount] = useState(0);
     const [tracks, setTracks] = useState([]);
-    const [count, setCount] = useState(1);
-    let UID;
+    const [UID, setUID] = useState(); 
     
     function appendConfiguredTrack(trackTitle) {
-        UID = nextId();
+        setUID(nextId());
         setCount(count + 1);
         setTracks( tracks => [...tracks, 
             <ConfiguredTrack 
@@ -48,62 +48,18 @@ function PlaylistBuilder(props) {
                 deleteConfiguredTrack={deleteConfiguredTrack}
                 UID={UID} 
             />]);
+
+        console.log('append count: ' + count);
     }
 
     function deleteConfiguredTrack(trackUID) {
-        console.log('deleting track');
 
-        // console.log(trackUID)
- 
-        // tracks.map(track => {
-
-        //     console.log('props: ' + track.props.UID);
-        //     console.log('elem: ' + trackUID);
-        //     // track.uid !== trackUID
-        // });     
-
-        // let trackMatch = tracks.map(track => {
-        //    return track.props.uid !== trackUID;
-        // });     
-
-        // console.log(trackMatch);
-        console.log(tracks);
-
-
-        
-        // let i = 0;
-        // const trackIndex = tracks.map(track => {
-        //     ++i; 
-            
-        //     if(track.props.uid === trackuid)
-        //     {
-        //         console.log(track.props.UID);
-        //         console.log(trackUID);
-
-        //         return i; 
-        //     }
-        // });
-        // console.log(trackIndex);
-
-
-
-        // let index = tracks.find(track => track.props.UID !== trackUID);        
-        // console.log(index);
-
-        // setTracks(tracks.filter(track => track.props.UID !== trackUID));
-
-
-        // let filteredTracks =  tracks.filter((track) => (track !== e.target.value))
-        // setTracks(filteredTracks);
-
-        // console.log(filteredTracks);
-
-        // console.log(tracks[0].props.UID);
-
-        
-        // setTracks(tracks.filter((track) => (track.UID != trackUID)));
-        // setTracks(tracks.filter((track) => (track != trackUID)));
-        // setTracks( tracks => [...tracks, tracks.splice(i)]);
+        // this deletes all tracks under the selected one because the
+        // the state of the tracks is not being updated. (look at the count state in browser)
+        // 2 tracks then delete one and the count will think it's 0 instead of 1
+        setTracks(tracks.filter(track => track.props.UID !== trackUID));
+        setCount(count - 1);
+        // console.log('delete count: ' + count);
     }
 
     return (
@@ -115,12 +71,10 @@ function PlaylistBuilder(props) {
                 tracks={tracks}
             />
 
-            <NewTrack 
+            <TrackConfiguration 
                 trackTitle={"Track " + count} 
                 appendConfiguredTrack={appendConfiguredTrack}
             />
-
-
         </div>
     );
 }

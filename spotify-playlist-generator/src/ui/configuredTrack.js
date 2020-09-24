@@ -34,9 +34,6 @@ const useStyles = makeStyles({
 
 function ConfiguredTrack(props) {
     const classes = useStyles();
-    const [UID, setUID] = useState(props.UID);
-
-    // TODO will need to add 'listener' functions for when buttons are pressed
     
     return(
         <div name={props.UID} className={classes.root}>
@@ -47,7 +44,7 @@ function ConfiguredTrack(props) {
                     size="small"
                     aria-label="Delete"
                     onClick={() => {props.deleteConfiguredTrack(props.UID)}}
-                    // onClick={props.deleteConfiguredTrack}
+                    // onClick={deleteConfiguredTrack}
             ><DeleteIcon/></IconButton>
 
             <IconButton 
