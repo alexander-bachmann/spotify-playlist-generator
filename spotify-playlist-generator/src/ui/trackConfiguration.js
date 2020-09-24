@@ -48,7 +48,10 @@ function TrackConfiguration(props) {
                 UID={nextId()}
             />]);
 
-            // WILL PASS THIS DOWN TO FEATURES
+
+
+
+            // WILL PASS THIS DOWN TO FEATURES ... should probably set features based off of this json
         props.setPlaylistTracksJSON( trackFeatures => [...trackFeatures, {'test': 'aoeu'}]);
        
     }
@@ -78,7 +81,9 @@ function TrackConfiguration(props) {
                 ><AddIcon/></IconButton>
             </div>
             
-            <Features />
+            <Features 
+                setPlaylistTracksJSON={props.setPlaylistTracksJSON}
+            />
         </div>
     )
 }

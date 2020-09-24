@@ -41,26 +41,26 @@ function Feature(props) {
     const classes = useStyles();
     const [checked, setChecked] = useState(false);
 
-    let values = [];
-
+    let defaultValues = [];
+    
     if(props.nodes == '1') {
-        values[0] = props.min;
+        defaultValues[0] = props.min;
     }
     else {
-        values[0] = props.min;
-        values[1] = props.max;
+        defaultValues[0] = props.min;
+        defaultValues[1] = props.max;
     }
     
-    const [value, setValue] = useState(values);
+    const [values, setValues] = useState(defaultValues);
 
     const toggleChecked = () => {
-        // console.log(checked);
         setChecked((prev) => !prev);
     };
 
     const handleChange = (event, newValue) => {
-        // console.log(value);
-        setValue(newValue);
+        setValues(newValue);
+        props.setFeature(values);
+        
     };
 
     return (
@@ -83,7 +83,7 @@ function Feature(props) {
                 }} />
 
             <Slider
-                value={value}
+                value={values}
                 disabled={!checked}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
