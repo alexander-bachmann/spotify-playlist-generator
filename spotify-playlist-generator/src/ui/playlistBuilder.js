@@ -1,9 +1,7 @@
 import React, { useState, useEffect }from 'react';
 import TextInputField from './textInputField';
 import TrackConfiguration from './trackConfiguration';
-import ConfiguredTrack from './configuredTrack';
 import ConfiguredTracks from './configuredTracks';
-import nextId from "react-id-generator";
 import FinishButtons from './finishButtons';
  /*
         TODO probably need to add states for everything that may change such as titles 

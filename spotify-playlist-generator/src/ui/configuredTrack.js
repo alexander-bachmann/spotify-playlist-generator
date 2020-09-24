@@ -43,6 +43,8 @@ function ConfiguredTrack(props) {
         props.setCount(count => count - 1);
         props.setTracks(tracks => tracks.filter(
             track => track.props.UID !== props.UID));
+        props.setPlaylistTracksJSON(tracks => tracks.filter(
+            track => track.uid !== props.UID));
     }
     
     return(

@@ -53,17 +53,21 @@ function TrackConfiguration(props) {
     const [key, setKey] = useState([]);
 
     function addTrack() {
+        let UID = nextId();
+
         props.setCount(count => count + 1);
         props.setTracks( tracks => [...tracks, 
             <ConfiguredTrack 
                 trackTitle={props.trackTitle}
                 setTracks={props.setTracks}
                 setCount={props.setCount}
-                UID={nextId()}
+                setPlaylistTracksJSON={props.setPlaylistTracksJSON}
+                UID={UID}
             />]);
         
         props.setPlaylistTracksJSON( 
             trackFeatures => [...trackFeatures, {
+                'uid': UID,
                 'instrumentalness': instrumentalness,
                 'timeSignature': timeSignature,
                 'acousticness': acousticness,
@@ -81,28 +85,27 @@ function TrackConfiguration(props) {
             ]);
     }
 
-    function clearTrack() {
-        console.log('track cleared');
-    }   
+    // function clearTrack() {
+    //     console.log('track cleared');
+    // }   
 
     return (
         <div>
             <div className={classes.root}>
                 <span className={classes.trackTitle}>{props.trackTitle}</span>
                 
-                <IconButton 
+                {/* <IconButton 
                     className={classes.resetButton}
                     size="small"
                     aria-label="clear"
                     onClick={clearTrack}
-                ><ClearIcon/></IconButton>
+                ><ClearIcon/></IconButton> */}
                
                 <IconButton 
                     className={classes.addButton}
                     size="small"
                     aria-label="add"
                     onClick={addTrack}
-                    
                 ><AddIcon/></IconButton>
             </div>
             
