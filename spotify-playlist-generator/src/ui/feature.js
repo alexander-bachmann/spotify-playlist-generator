@@ -55,6 +55,8 @@ function Feature(props) {
 
     const toggleChecked = () => {
         setChecked((prev) => !prev);
+        props.setFeature([]);
+        setValues([props.min, props.max]);
     };
 
     const handleChange = (event, newValue) => {
