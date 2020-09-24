@@ -11,10 +11,10 @@ function App() {
             <div className="App-header">
                 <SignInButton />
                 <PlaylistBuilder />
-                <Recommendations 
+                {/* <Recommendations 
                     artistURI='4frXpPxQQZwbCu3eTGnZEw' 
                     limit='5'/>
-                <RecommendedTracks />
+                <RecommendedTracks /> */}
 
             </div>
         </div>

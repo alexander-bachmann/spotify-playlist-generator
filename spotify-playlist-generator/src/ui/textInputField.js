@@ -45,9 +45,10 @@ function TextInputField(props) {
                 label={props.defaultText} 
                 variant="outlined" 
                 fullWidth
-                InputProps={{
-                    className: classes.inputField
-                }}
+                // InputProps={{
+                //     className: classes.inputField
+                // }}
+                onChange={(event) => props.onChange(event.target.value)}
                 margin="normal"
             />
         </form> 

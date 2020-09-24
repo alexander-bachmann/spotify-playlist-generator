@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
+import ConfiguredTrack from './configuredTrack';
+import nextId from 'react-id-generator';
 
 const useStyles = makeStyles({
     root: {
@@ -37,8 +39,18 @@ function TrackConfiguration(props) {
     const classes = useStyles();
 
     function addTrack() {
-        props.appendConfiguredTrack(props.trackTitle)
-        console.log('track added');
+        props.setCount(count => count + 1);
+        props.setTracks( tracks => [...tracks, 
+            <ConfiguredTrack 
+                trackTitle={props.trackTitle}
+                setTracks={props.setTracks}
+                setCount={props.setCount}
+                UID={nextId()}
+            />]);
+
+            // WILL PASS THIS DOWN TO FEATURES
+        props.setPlaylistTracksJSON( trackFeatures => [...trackFeatures, {'test': 'aoeu'}]);
+       
     }
 
     function clearTrack() {

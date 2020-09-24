@@ -34,6 +34,16 @@ const useStyles = makeStyles({
 
 function ConfiguredTrack(props) {
     const classes = useStyles();
+
+    function changeTrack() {
+        console.log('changing track...');
+    }
+
+    function deleteTrack() {
+        props.setCount(count => count - 1);
+        props.setTracks(tracks => tracks.filter(
+            track => track.props.UID !== props.UID));
+    }
     
     return(
         <div name={props.UID} className={classes.root}>
@@ -43,16 +53,15 @@ function ConfiguredTrack(props) {
                     className={classes.deleteButton}
                     size="small"
                     aria-label="Delete"
-                    onClick={() => {props.deleteConfiguredTrack(props.UID)}}
-                    // onClick={deleteConfiguredTrack}
+                    onClick={deleteTrack}
             ><DeleteIcon/></IconButton>
 
             <IconButton 
                     className={classes.settingsButton}
                     size="small"
                     aria-label="settings"
+                    onClick={changeTrack}
             ><SettingsIcon/></IconButton>
-           
         </div>
     )
 }

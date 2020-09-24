@@ -34,57 +34,40 @@ import FinishButtons from './finishButtons';
 
 
 function PlaylistBuilder(props) {
+    const [playlistTitle, setPlaylistTitle] =useState('');
+    const [spotifyURI, setSpotifyURI] = useState('');
     const [count, setCount] = useState(0);
     const [tracks, setTracks] = useState([]);
-    const [UID, setUID] = useState(nextId()); 
+    const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
     
-    function appendConfiguredTrack(trackTitle) {
-        setUID(nextId());
-        setCount(count + 1);
-        setTracks( tracks => [...tracks, 
-            <ConfiguredTrack 
-                trackTitle={trackTitle}
-                deleteConfiguredTrack={deleteConfiguredTrack}
-                UID={UID} 
-            />]);
-    }
-
-    function deleteConfiguredTrack(trackUID) {
-
-        // this deletes all tracks under the selected one because the
-        // the state of the tracks is not being updated. (look at the count state in browser)
-        // 2 tracks then delete one and the count will think it's 0 instead of 1
-        console.log(trackUID); 
-        
-        setTracks(tracks.filter(track => track.props.UID !== trackUID));
-        
-        // tracks.map(track => 
-        //     {
-        //         console.log('---');
-        //         console.log(track.props.UID);
-        //         console.log(trackUID);
-        //     });
-        // setCount(count - 1);
-    }
-
-
     return (
         <div>
-            <TextInputField defaultText="Playlist Title"/>
-            <TextInputField defaultText="Artist Spotify URI"/>
+            {/* these will be deleted.. they are just proof that state is being saved */}
+            <h5>{playlistTitle}</h5>
+            <h5>{spotifyURI}</h5>
+
+            <TextInputField 
+                defaultText="Playlist Title"
+                onChange={setPlaylistTitle}
+            />
+            <TextInputField 
+                defaultText="Artist Spotify URI"
+                onChange={setSpotifyURI}
+            />
 
             <FinishButtons />
            
             <ConfiguredTracks 
                 tracks={tracks}
+                count={count}
             />
 
             <TrackConfiguration 
-                trackTitle={"Track " + count} 
-                appendConfiguredTrack={appendConfiguredTrack}
+                trackTitle={"Track " + `${count + 1}`} 
+                setTracks={setTracks}
+                setPlaylistTracksJSON={setPlaylistTracksJSON}
+                setCount={setCount}
             />
-
-            
         </div>
     );
 }
