@@ -51,18 +51,56 @@ function PlaylistBuilder(props) {
     }
 
     function deleteConfiguredTrack(trackUID) {
-        
-        // setTracks(tracks.filter(track => track.uid !== trackUID));
-        //DEBUGGING --trying to get these two values to match
-        setTracks(tracks.filter(track => {
-            console.log(track.UID);
-            console.log(trackUID);
-            // track.uid !== trackUID
-        }));
-        
-        // console.log(tracks[0].uid); 
-        // console.log(trackUID); 
         console.log('deleting track');
+
+        // console.log(trackUID)
+ 
+        // tracks.map(track => {
+
+        //     console.log('props: ' + track.props.UID);
+        //     console.log('elem: ' + trackUID);
+        //     // track.uid !== trackUID
+        // });     
+
+        // let trackMatch = tracks.map(track => {
+        //    return track.props.uid !== trackUID;
+        // });     
+
+        // console.log(trackMatch);
+        console.log(tracks);
+
+
+        
+        // let i = 0;
+        // const trackIndex = tracks.map(track => {
+        //     ++i; 
+            
+        //     if(track.props.uid === trackuid)
+        //     {
+        //         console.log(track.props.UID);
+        //         console.log(trackUID);
+
+        //         return i; 
+        //     }
+        // });
+        // console.log(trackIndex);
+
+
+
+        // let index = tracks.find(track => track.props.UID !== trackUID);        
+        // console.log(index);
+
+        // setTracks(tracks.filter(track => track.props.UID !== trackUID));
+
+
+        // let filteredTracks =  tracks.filter((track) => (track !== e.target.value))
+        // setTracks(filteredTracks);
+
+        // console.log(filteredTracks);
+
+        // console.log(tracks[0].props.UID);
+
+        
         // setTracks(tracks.filter((track) => (track.UID != trackUID)));
         // setTracks(tracks.filter((track) => (track != trackUID)));
         // setTracks( tracks => [...tracks, tracks.splice(i)]);
