@@ -4,6 +4,7 @@ import TrackConfiguration from './trackConfiguration';
 import ConfiguredTrack from './configuredTrack';
 import ConfiguredTracks from './configuredTracks';
 import nextId from "react-id-generator";
+import FinishButtons from './finishButtons';
  /*
         TODO probably need to add states for everything that may change such as titles 
         
@@ -27,17 +28,15 @@ import nextId from "react-id-generator";
                             * Slider
                             * Toggle Switch
 
-
-                Build Button
-
-                Save Playlist Button
+                * Build Button
+                * Save Button
         */
 
 
 function PlaylistBuilder(props) {
     const [count, setCount] = useState(0);
     const [tracks, setTracks] = useState([]);
-    const [UID, setUID] = useState(); 
+    const [UID, setUID] = useState(0); 
     
     function appendConfiguredTrack(trackTitle) {
         setUID(nextId());
@@ -45,11 +44,9 @@ function PlaylistBuilder(props) {
         setTracks( tracks => [...tracks, 
             <ConfiguredTrack 
                 trackTitle={trackTitle}
-                deleteConfiguredTrack={deleteConfiguredTrack}
+                removeTrack={() => removeTrack()}
                 UID={UID} 
             />]);
-
-        console.log('append count: ' + count);
     }
 
     function deleteConfiguredTrack(trackUID) {
@@ -57,9 +54,21 @@ function PlaylistBuilder(props) {
         // this deletes all tracks under the selected one because the
         // the state of the tracks is not being updated. (look at the count state in browser)
         // 2 tracks then delete one and the count will think it's 0 instead of 1
+        console.log(trackUID); 
+        
         setTracks(tracks.filter(track => track.props.UID !== trackUID));
-        setCount(count - 1);
-        // console.log('delete count: ' + count);
+        
+        // tracks.map(track => 
+        //     {
+        //         console.log('---');
+        //         console.log(track.props.UID);
+        //         console.log(trackUID);
+        //     });
+        // setCount(count - 1);
+    }
+
+    function removeTrack(trackUID) {
+        deleteConfiguredTrack(trackUID);
     }
 
     return (
@@ -67,6 +76,8 @@ function PlaylistBuilder(props) {
             <TextInputField defaultText="Playlist Title"/>
             <TextInputField defaultText="Artist Spotify URI"/>
 
+            <FinishButtons />
+           
             <ConfiguredTracks 
                 tracks={tracks}
             />
@@ -75,6 +86,8 @@ function PlaylistBuilder(props) {
                 trackTitle={"Track " + count} 
                 appendConfiguredTrack={appendConfiguredTrack}
             />
+
+            
         </div>
     );
 }
