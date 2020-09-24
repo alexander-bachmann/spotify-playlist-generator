@@ -43,7 +43,7 @@ function ConfiguredTrack(props) {
                     className={classes.deleteButton}
                     size="small"
                     aria-label="Delete"
-                    onClick={() => {props.removeTrack(props.UID)}}
+                    onClick={() => {props.deleteConfiguredTrack(props.UID)}}
                     // onClick={deleteConfiguredTrack}
             ><DeleteIcon/></IconButton>
 

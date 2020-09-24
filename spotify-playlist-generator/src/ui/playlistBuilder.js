@@ -36,7 +36,7 @@ import FinishButtons from './finishButtons';
 function PlaylistBuilder(props) {
     const [count, setCount] = useState(0);
     const [tracks, setTracks] = useState([]);
-    const [UID, setUID] = useState(0); 
+    const [UID, setUID] = useState(nextId()); 
     
     function appendConfiguredTrack(trackTitle) {
         setUID(nextId());
@@ -44,7 +44,7 @@ function PlaylistBuilder(props) {
         setTracks( tracks => [...tracks, 
             <ConfiguredTrack 
                 trackTitle={trackTitle}
-                removeTrack={() => removeTrack()}
+                deleteConfiguredTrack={deleteConfiguredTrack}
                 UID={UID} 
             />]);
     }
@@ -67,9 +67,6 @@ function PlaylistBuilder(props) {
         // setCount(count - 1);
     }
 
-    function removeTrack(trackUID) {
-        deleteConfiguredTrack(trackUID);
-    }
 
     return (
         <div>

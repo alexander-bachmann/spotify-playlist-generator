@@ -38,6 +38,7 @@ function TrackConfiguration(props) {
 
     function addTrack() {
         props.appendConfiguredTrack(props.trackTitle)
+        console.log('track added');
     }
 
     function clearTrack() {
