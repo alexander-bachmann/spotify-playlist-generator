@@ -41,17 +41,16 @@ function Feature(props) {
     const classes = useStyles();
     const [checked, setChecked] = useState(false);
 
-    let defaultValues = [];
-    
-    if(props.nodes == '1') {
-        defaultValues[0] = props.min;
-    }
-    else {
-        defaultValues[0] = props.min;
-        defaultValues[1] = props.max;
-    }
-    
-    const [values, setValues] = useState(defaultValues);
+    // let defaultValues = [];
+    // if(props.nodes == '1') {
+    //     defaultValues[0] = props.min;
+    // }
+    // else {
+    //     defaultValues[0] = props.min;
+    //     defaultValues[1] = props.max;
+    // }
+    // const [values, setValues] = useState(defaultValues);
+    const [values, setValues] = useState([props.min, props.max]);
 
     const toggleChecked = () => {
         setChecked((prev) => !prev);
@@ -62,7 +61,6 @@ function Feature(props) {
     const handleChange = (event, newValue) => {
         setValues(newValue);
         props.setFeature(values);
-        
     };
 
     return (

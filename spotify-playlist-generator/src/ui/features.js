@@ -53,11 +53,12 @@ function Features(props) {
                 defaultName='Tempo' min='0' max='300' 
                 setFeature={setTempo}/>
             <Feature 
+                // TODO Mode is broken
                 defaultName='Mode' min='0' max='1' 
-                setFeature={setMode} nodes='1'/>
+                setFeature={setMode}/>
             <Feature 
                 defaultName='Key' min='0' max='11' 
-                setFeature={setKey} nodes='1'/>
+                setFeature={setKey}/>
         </div>
     )
 }
