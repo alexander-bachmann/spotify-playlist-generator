@@ -2,63 +2,49 @@ import React, { useState } from 'react';
 import Feature from './feature';
 
 function Features(props) {
-    
-    const [instrumentalness, setInstrumentalness] = useState([]);
-    const [timeSignature, setTimeSignature] = useState([]);
-    const [acousticness, setAcousticness] = useState([]);
-    const [danceability, setDanceability] = useState([]);
-    const [speechiness, setSpeechiness] = useState([]);
-    const [loudness, setLoudness] = useState([]);
-    const [liveness, setLiveness] = useState([]);
-    const [duration, setDuration] = useState([]);
-    const [valence, setValence] = useState([]);
-    const [energy, setEnergy] = useState([]);
-    const [tempo, setTempo] = useState([]);
-    const [mode, setMode] = useState([]);
-    const [key, setKey] = useState([]);
-    
+      
     return (
         <div>
             <Feature 
                 defaultName='Instrumentalness' min='0' max='100'
-                setFeature={setInstrumentalness}/>
+                setFeature={props.setInstrumentalness}/>
             <Feature 
                 defaultName='Time Signature' min='1' max='12'
-                setFeature={setTimeSignature}/>
+                setFeature={props.setTimeSignature}/>
             <Feature 
                 defaultName='Acousticness' min='0' max='100' 
-                setFeature={setAcousticness}/>
+                setFeature={props.setAcousticness}/>
             <Feature 
                 defaultName='Danceability' min='0' max='100' 
-                setFeature={setDanceability}/>
+                setFeature={props.setDanceability}/>
             <Feature 
                 defaultName='Speechiness' min='0' max='100' 
-                setFeature={setSpeechiness}/>
+                setFeature={props.setSpeechiness}/>
             <Feature 
                 defaultName='Loudness' min='-60' max='0' 
-                setFeature={setLoudness}/>
+                setFeature={props.setLoudness}/>
             <Feature 
                 defaultName='Liveness' min='0' max='100' 
-                setFeature={setLiveness}/>
+                setFeature={props.setLiveness}/>
             <Feature 
                 defaultName='Duration' min='0' max='20' 
-                setFeature={setDuration}/>
+                setFeature={props.setDuration}/>
             <Feature 
                 defaultName='Valence' min='0' max='100' 
-                setFeature={setValence}/>
+                setFeature={props.setValence}/>
             <Feature 
                 defaultName='Energy' min='0' max='100' 
-                setFeature={setEnergy}/>
+                setFeature={props.setEnergy}/>
             <Feature 
                 defaultName='Tempo' min='0' max='300' 
-                setFeature={setTempo}/>
+                setFeature={props.setTempo}/>
             <Feature 
                 // TODO Mode is broken
                 defaultName='Mode' min='0' max='1' 
-                setFeature={setMode}/>
+                setFeature={props.setMode}/>
             <Feature 
                 defaultName='Key' min='0' max='11' 
-                setFeature={setKey}/>
+                setFeature={props.setKey}/>
         </div>
     )
 }

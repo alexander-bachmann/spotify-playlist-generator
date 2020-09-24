@@ -37,6 +37,20 @@ const useStyles = makeStyles({
 
 function TrackConfiguration(props) {
     const classes = useStyles();
+   
+    const [instrumentalness, setInstrumentalness] = useState([]);
+    const [timeSignature, setTimeSignature] = useState([]);
+    const [acousticness, setAcousticness] = useState([]);
+    const [danceability, setDanceability] = useState([]);
+    const [speechiness, setSpeechiness] = useState([]);
+    const [loudness, setLoudness] = useState([]);
+    const [liveness, setLiveness] = useState([]);
+    const [duration, setDuration] = useState([]);
+    const [valence, setValence] = useState([]);
+    const [energy, setEnergy] = useState([]);
+    const [tempo, setTempo] = useState([]);
+    const [mode, setMode] = useState([]);
+    const [key, setKey] = useState([]);
 
     function addTrack() {
         props.setCount(count => count + 1);
@@ -47,13 +61,24 @@ function TrackConfiguration(props) {
                 setCount={props.setCount}
                 UID={nextId()}
             />]);
-
-
-
-
-            // WILL PASS THIS DOWN TO FEATURES ... should probably set features based off of this json
-        props.setPlaylistTracksJSON( trackFeatures => [...trackFeatures, {'test': 'aoeu'}]);
-       
+        
+        props.setPlaylistTracksJSON( 
+            trackFeatures => [...trackFeatures, {
+                'instrumentalness': instrumentalness,
+                'timeSignature': timeSignature,
+                'acousticness': acousticness,
+                'danceability': danceability,
+                'speechiness': speechiness,
+                'loudness': loudness,
+                'liveness': liveness,
+                'duration': duration,
+                'valence': valence,
+                'energy': energy,
+                'tempo': tempo,
+                'mode': mode,
+                'key': key
+                }
+            ]);
     }
 
     function clearTrack() {
@@ -83,6 +108,19 @@ function TrackConfiguration(props) {
             
             <Features 
                 setPlaylistTracksJSON={props.setPlaylistTracksJSON}
+                setInstrumentalness={setInstrumentalness}
+                setTimeSignature={setTimeSignature}
+                setAcousticness={setAcousticness}
+                setDanceability={setDanceability}
+                setSpeechiness={setSpeechiness}
+                setLoudness={setLoudness}
+                setLiveness={setLiveness}
+                setDuration={setDuration}
+                setValence={setValence}
+                setEnergy={setEnergy}
+                setTempo={setTempo}
+                setMode={setMode}
+                setKey={setKey}
             />
         </div>
     )
