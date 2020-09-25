@@ -39,8 +39,8 @@ function PlaylistBuilder(props) {
     const [tracks, setTracks] = useState([]);
     const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
     const [fetchedRecommended, setFetchedRecommended] = useState({});
-    const [fetchedFeatures, setFetchedFeatures] = useState({});
     const [trackIDs, setTrackIDs] = useState([]);
+    const [fetchedFeatures, setFetchedFeatures] = useState({});
     const [hasError, setErrors] = useState(false);
 
     useEffect(() => {
@@ -58,9 +58,31 @@ function PlaylistBuilder(props) {
         fetchFeatures(
             'https://api.spotify.com/v1/audio-features?', 
             'ids=', 
-            trackIDs)
+            trackIDs);
 
     }, [trackIDs])
+
+    useEffect(() => {
+
+        // console.log(playlistTracksJSON);
+
+        let recommendedTracksFeatures = Array.from(fetchedFeatures);
+        let playlistCriteria = Array.from(playlistTracksJSON);
+
+
+        recommendedTracksFeatures.forEach((track) => {
+            if(track !== null) {
+                console.log(track.acousticness);
+
+
+                playlistCriteria.forEach((trackCriteria) => {
+                    console.log(trackCriteria.acousticness)
+                })
+            }
+        })
+
+
+    }, [fetchedFeatures]);
     
     async function fetchFeatures(endpointURL, queryParam, query) {
         const token = Cookies.get('spotifyAuthToken'); 
