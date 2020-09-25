@@ -1,6 +1,6 @@
-if(playlistTrack.loudness.length == 0 ||
-(playlistTrack.loudness[0] <= fetchedTrack.loudness * 100) && 
-(playlistTrack.loudness[1] >= fetchedTrack.loudness * 100)) {
-    console.log('loudness: ' + fetchedTrack.loudness * 100 + ' is within [' + playlistTrack.loudness[0] + ',' + playlistTrack.loudness[1] + ']');
+if(playlistTrack.duration.length == 0 ||
+(playlistTrack.duration[0] <= fetchedTrack.duration_ms / 60000) && 
+(playlistTrack.duration[1] >= fetchedTrack.duration_ms / 60000)) {
+    console.log('duration_ms: ' + fetchedTrack.duration_ms * 100 + ' is within [' + playlistTrack.duration[0] + ',' + playlistTrack.duration[1] + ']');
 
 } else { break; }

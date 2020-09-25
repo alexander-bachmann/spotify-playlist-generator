@@ -94,18 +94,30 @@ function PlaylistBuilder(props) {
                                     (playlistTrack.speechiness[0] <= fetchedTrack.speechiness * 100) && 
                                     (playlistTrack.speechiness[1] >= fetchedTrack.speechiness * 100)) {
 
-                                           if(playlistTrack.loudness.length == 0 ||
-                                            (playlistTrack.loudness[0] <= fetchedTrack.loudness * 100) && 
-                                            (playlistTrack.loudness[1] >= fetchedTrack.loudness * 100)) {
-                                                console.log('----');
-                                                console.log('instrumentalness: ' + fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
-                                                console.log('time_signature: ' + fetchedTrack.time_signature + ' is within [' + playlistTrack.timeSignature[0] + ',' + playlistTrack.timeSignature[1] + ']');
-                                                console.log('acousticness: ' + fetchedTrack.acousticness * 100 + ' is within [' + playlistTrack.acousticness[0] + ',' + playlistTrack.acousticness[1] + ']');
-                                                console.log('danceability: ' + fetchedTrack.danceability * 100 + ' is within [' + playlistTrack.danceability[0] + ',' + playlistTrack.danceability[1] + ']');
-                                                console.log('speechiness: ' + fetchedTrack.speechiness * 100 + ' is within [' + playlistTrack.speechiness[0] + ',' + playlistTrack.speechiness[1] + ']');
-                                                console.log('loudness: ' + fetchedTrack.loudness * 100 + ' is within [' + playlistTrack.loudness[0] + ',' + playlistTrack.loudness[1] + ']');
+                                        if(playlistTrack.loudness.length == 0 ||
+                                        (playlistTrack.loudness[0] <= fetchedTrack.loudness) && 
+                                        (playlistTrack.loudness[1] >= fetchedTrack.loudness)) {
 
+                                            if(playlistTrack.liveness.length == 0 ||
+                                            (playlistTrack.liveness[0] <= fetchedTrack.liveness * 100) && 
+                                            (playlistTrack.liveness[1] >= fetchedTrack.liveness * 100)) {
+
+                                                if(playlistTrack.duration.length == 0 ||
+                                                (playlistTrack.duration[0] <= fetchedTrack.duration_ms / 60000) && 
+                                                (playlistTrack.duration[1] >= fetchedTrack.duration_ms / 60000)) {
+                                                    console.log('----');
+                                                    console.log('instrumentalness: ' + fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
+                                                    console.log('time_signature: ' + fetchedTrack.time_signature + ' is within [' + playlistTrack.timeSignature[0] + ',' + playlistTrack.timeSignature[1] + ']');
+                                                    console.log('acousticness: ' + fetchedTrack.acousticness * 100 + ' is within [' + playlistTrack.acousticness[0] + ',' + playlistTrack.acousticness[1] + ']');
+                                                    console.log('danceability: ' + fetchedTrack.danceability * 100 + ' is within [' + playlistTrack.danceability[0] + ',' + playlistTrack.danceability[1] + ']');
+                                                    console.log('speechiness: ' + fetchedTrack.speechiness * 100 + ' is within [' + playlistTrack.speechiness[0] + ',' + playlistTrack.speechiness[1] + ']');
+                                                    console.log('loudness: ' + fetchedTrack.loudness + ' is within [' + playlistTrack.loudness[0] + ',' + playlistTrack.loudness[1] + ']');
+                                                    console.log('liveness: ' + fetchedTrack.liveness * 100 + ' is within [' + playlistTrack.liveness[0] + ',' + playlistTrack.liveness[1] + ']');
+                                                    console.log('duration_ms: ' + fetchedTrack.duration_ms / 60000 + ' is within [' + playlistTrack.duration[0] + ',' + playlistTrack.duration[1] + ']');
+
+                                                } else { break; }
                                             } else { break; }
+                                        } else { break; }
                                     } else { break; }
                                 } else { break; }
                             } else { break; }
