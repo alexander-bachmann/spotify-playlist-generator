@@ -1,4 +1,6 @@
-if((playlistTrack.instrumentalness[0] <= fetchedTrack.instrumentalness * 100) && 
-(playlistTrack.instrumentalness[1] >= fetchedTrack.instrumentalness * 100)) {
-    console.log(fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
+if(playlistTrack.loudness.length == 0 ||
+(playlistTrack.loudness[0] <= fetchedTrack.loudness * 100) && 
+(playlistTrack.loudness[1] >= fetchedTrack.loudness * 100)) {
+    console.log('loudness: ' + fetchedTrack.loudness * 100 + ' is within [' + playlistTrack.loudness[0] + ',' + playlistTrack.loudness[1] + ']');
+
 } else { break; }

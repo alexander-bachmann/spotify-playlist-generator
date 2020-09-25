@@ -67,12 +67,12 @@ function PlaylistBuilder(props) {
 
         let recommendedTracksFeatures = Array.from(fetchedFeatures);
         let playlistCriteria = Array.from(playlistTracksJSON);
+        let ids = [];
 
         for(let fetchedTrack of recommendedTracksFeatures) {
             if(fetchedTrack !== null) {
 
-                for(let playlistTrack of playlistCriteria) {
-                    // console.log(playlistTrack.instrumentalness);
+            for(let playlistTrack of playlistCriteria) {
                     
                     if(playlistTrack.instrumentalness.length == 0 ||
                     (playlistTrack.instrumentalness[0] <= fetchedTrack.instrumentalness * 100) && 
@@ -82,14 +82,39 @@ function PlaylistBuilder(props) {
                         (playlistTrack.timeSignature[0] <= fetchedTrack.time_signature) && 
                         (playlistTrack.timeSignature[1] >= fetchedTrack.time_signature)) {
                            
-                            console.log('instrumentalness: ' + fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
-                            console.log('time_signature: ' + fetchedTrack.time_signature + ' is within [' + playlistTrack.timeSignature[0] + ',' + playlistTrack.timeSignature[1] + ']');
+                            if(playlistTrack.acousticness.length == 0 ||
+                            (playlistTrack.acousticness[0] <= fetchedTrack.acousticness * 100) && 
+                            (playlistTrack.acousticness[1] >= fetchedTrack.acousticness * 100)) {
+                                                               
+                                if(playlistTrack.danceability.length == 0 ||
+                                (playlistTrack.danceability[0] <= fetchedTrack.danceability * 100) && 
+                                (playlistTrack.danceability[1] >= fetchedTrack.danceability * 100)) {
 
+                                   if(playlistTrack.speechiness.length == 0 ||
+                                    (playlistTrack.speechiness[0] <= fetchedTrack.speechiness * 100) && 
+                                    (playlistTrack.speechiness[1] >= fetchedTrack.speechiness * 100)) {
+
+                                           if(playlistTrack.loudness.length == 0 ||
+                                            (playlistTrack.loudness[0] <= fetchedTrack.loudness * 100) && 
+                                            (playlistTrack.loudness[1] >= fetchedTrack.loudness * 100)) {
+                                                console.log('----');
+                                                console.log('instrumentalness: ' + fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
+                                                console.log('time_signature: ' + fetchedTrack.time_signature + ' is within [' + playlistTrack.timeSignature[0] + ',' + playlistTrack.timeSignature[1] + ']');
+                                                console.log('acousticness: ' + fetchedTrack.acousticness * 100 + ' is within [' + playlistTrack.acousticness[0] + ',' + playlistTrack.acousticness[1] + ']');
+                                                console.log('danceability: ' + fetchedTrack.danceability * 100 + ' is within [' + playlistTrack.danceability[0] + ',' + playlistTrack.danceability[1] + ']');
+                                                console.log('speechiness: ' + fetchedTrack.speechiness * 100 + ' is within [' + playlistTrack.speechiness[0] + ',' + playlistTrack.speechiness[1] + ']');
+                                                console.log('loudness: ' + fetchedTrack.loudness * 100 + ' is within [' + playlistTrack.loudness[0] + ',' + playlistTrack.loudness[1] + ']');
+
+                                            } else { break; }
+                                    } else { break; }
+                                } else { break; }
+                            } else { break; }
                         } else { break; }
                     } else { break; }
                 }
             }
         }
+
 
 
     }, [fetchedFeatures]);
