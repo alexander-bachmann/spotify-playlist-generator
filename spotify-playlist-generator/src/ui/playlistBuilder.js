@@ -40,6 +40,7 @@ function PlaylistBuilder(props) {
     const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
     const [fetchedRecommended, setFetchedRecommended] = useState({});
     const [trackIDs, setTrackIDs] = useState([]);
+    const [playlistIDs, setPlaylistIDs] = useState([]);
     const [fetchedFeatures, setFetchedFeatures] = useState({});
     const [hasError, setErrors] = useState(false);
 
@@ -69,18 +70,23 @@ function PlaylistBuilder(props) {
 
         for(let fetchedTrack of recommendedTracksFeatures) {
             if(fetchedTrack !== null) {
-                // console.log(track);
-                
-                console.log(fetchedTrack.instrumentalness * 100);
 
                 for(let playlistTrack of playlistCriteria) {
-                    console.log(playlistTrack.instrumentalness);
+                    // console.log(playlistTrack.instrumentalness);
+                    
+                    if(playlistTrack.instrumentalness.length == 0 ||
+                    (playlistTrack.instrumentalness[0] <= fetchedTrack.instrumentalness * 100) && 
+                    (playlistTrack.instrumentalness[1] >= fetchedTrack.instrumentalness * 100)) {
 
-                    if((playlistTrack.instrumentalness[0] <= fetchedTrack.instrumentalness * 100) && 
-                    (playlistTrack.instrumentalness[1] >= fetchedTrack.instrumentalness * 100))
-                    {
-                        console.log(fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
-                    }
+                        if(playlistTrack.timeSignature.length == 0 ||
+                        (playlistTrack.timeSignature[0] <= fetchedTrack.time_signature) && 
+                        (playlistTrack.timeSignature[1] >= fetchedTrack.time_signature)) {
+                           
+                            console.log('instrumentalness: ' + fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
+                            console.log('time_signature: ' + fetchedTrack.time_signature + ' is within [' + playlistTrack.timeSignature[0] + ',' + playlistTrack.timeSignature[1] + ']');
+
+                        } else { break; }
+                    } else { break; }
                 }
             }
         }
