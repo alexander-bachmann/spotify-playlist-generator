@@ -47,27 +47,7 @@ function FinishButtons(props) {
             .then(res => props.setFetchedRecommended(res.tracks))
             .catch(err => props.setErrors(err));
     }
-
-    async function fetchFeatures(endpointURL, queryParam, query) {
-        const token = Cookies.get('spotifyAuthToken'); 
-        
-        let fetchURL = endpointURL + queryParam + query;
-        
-        const res = await fetch(fetchURL, {
-            method: 'GET',
-            headers: {
-                "Content-Type":"application/json", 
-                "Authorization": "Bearer " + token
-            }
-        });
-        
-        res
-            .json()
-            .then(res => props.setFetchedFeatures(res.audio_features))
-            .catch(err => props.setErrors(err));
-    }
-
- 
+    
     function buildPlaylist() {
         console.log('building playlist...');
 
