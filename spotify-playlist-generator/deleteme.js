@@ -1,6 +1,6 @@
-if(playlistTrack.duration.length == 0 ||
-(playlistTrack.duration[0] <= fetchedTrack.duration_ms / 60000) && 
-(playlistTrack.duration[1] >= fetchedTrack.duration_ms / 60000)) {
-    console.log('duration_ms: ' + fetchedTrack.duration_ms * 100 + ' is within [' + playlistTrack.duration[0] + ',' + playlistTrack.duration[1] + ']');
+if(playlistTrack.key.length == 0 ||
+(playlistTrack.key[0] <= fetchedTrack.key * 100) && 
+(playlistTrack.key[1] >= fetchedTrack.key * 100)) {
+    console.log('key: ' + fetchedTrack.key * 100 + ' is within [' + playlistTrack.key[0] + ',' + playlistTrack.key[1] + ']');
 
 } else { break; }
