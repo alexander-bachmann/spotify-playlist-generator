@@ -71,9 +71,8 @@ function PlaylistBuilder(props) {
 
         for(let fetchedTrack of recommendedTracksFeatures) {
             if(fetchedTrack !== null) {
-
-            for(let playlistTrack of playlistCriteria) {
-                    
+                for(let playlistTrack of playlistCriteria) {
+                        
                     if(playlistTrack.instrumentalness.length == 0 ||
                     (playlistTrack.instrumentalness[0] <= fetchedTrack.instrumentalness * 100) && 
                     (playlistTrack.instrumentalness[1] >= fetchedTrack.instrumentalness * 100)) {
@@ -81,16 +80,16 @@ function PlaylistBuilder(props) {
                         if(playlistTrack.timeSignature.length == 0 ||
                         (playlistTrack.timeSignature[0] <= fetchedTrack.time_signature) && 
                         (playlistTrack.timeSignature[1] >= fetchedTrack.time_signature)) {
-                           
+                        
                             if(playlistTrack.acousticness.length == 0 ||
                             (playlistTrack.acousticness[0] <= fetchedTrack.acousticness * 100) && 
                             (playlistTrack.acousticness[1] >= fetchedTrack.acousticness * 100)) {
-                                                               
+                                                            
                                 if(playlistTrack.danceability.length == 0 ||
                                 (playlistTrack.danceability[0] <= fetchedTrack.danceability * 100) && 
                                 (playlistTrack.danceability[1] >= fetchedTrack.danceability * 100)) {
 
-                                   if(playlistTrack.speechiness.length == 0 ||
+                                if(playlistTrack.speechiness.length == 0 ||
                                     (playlistTrack.speechiness[0] <= fetchedTrack.speechiness * 100) && 
                                     (playlistTrack.speechiness[1] >= fetchedTrack.speechiness * 100)) {
 
