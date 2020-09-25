@@ -64,25 +64,34 @@ function PlaylistBuilder(props) {
 
     useEffect(() => {
 
-        // console.log(playlistTracksJSON);
-
         let recommendedTracksFeatures = Array.from(fetchedFeatures);
         let playlistCriteria = Array.from(playlistTracksJSON);
 
+        for(let fetchedTrack of recommendedTracksFeatures) {
+            if(fetchedTrack !== null) {
+                // console.log(track);
+                
+                console.log(fetchedTrack.instrumentalness * 100);
 
-        recommendedTracksFeatures.forEach((track) => {
-            if(track !== null) {
-                console.log(track.acousticness);
+                for(let playlistTrack of playlistCriteria) {
+                    console.log(playlistTrack.instrumentalness);
 
-
-                playlistCriteria.forEach((trackCriteria) => {
-                    console.log(trackCriteria.acousticness)
-                })
+                    if((playlistTrack.instrumentalness[0] <= fetchedTrack.instrumentalness * 100) && 
+                    (playlistTrack.instrumentalness[1] >= fetchedTrack.instrumentalness * 100))
+                    {
+                        console.log(fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
+                    }
+                }
             }
-        })
+        }
 
 
     }, [fetchedFeatures]);
+
+
+
+
+
     
     async function fetchFeatures(endpointURL, queryParam, query) {
         const token = Cookies.get('spotifyAuthToken'); 
