@@ -140,8 +140,9 @@ function PlaylistBuilder(props) {
                                                                         console.log('mode: ' + fetchedTrack.mode + ' is within [' + playlistTrack.mode[0] + ',' + playlistTrack.mode[1] + ']');
                                                                         console.log('key: ' + fetchedTrack.key + ' is within [' + playlistTrack.key[0] + ',' + playlistTrack.key[1] + ']');
 
-                                                                        if(!ids.includes(fetchedTrack.id)) {
+                                                                        if(!ids.includes(fetchedTrack.id) && ids.length < playlistCriteria.length ) {
                                                                             ids.push(fetchedTrack.id);
+                                                                            console.log(playlistCriteria.length);
                                                                         }
 
                                                                     } else { 
