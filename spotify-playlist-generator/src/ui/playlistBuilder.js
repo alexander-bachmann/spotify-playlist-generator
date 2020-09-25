@@ -3,6 +3,7 @@ import TextInputField from './textInputField';
 import TrackConfiguration from './trackConfiguration';
 import ConfiguredTracks from './configuredTracks';
 import FinishButtons from './finishButtons';
+import Cookies from 'js-cookie'
  /*
         TODO probably need to add states for everything that may change such as titles 
         
@@ -37,8 +38,48 @@ function PlaylistBuilder(props) {
     const [count, setCount] = useState(0);
     const [tracks, setTracks] = useState([]);
     const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
-    const [fetchedData, setFetchedData] = useState({});
+    const [fetchedRecommended, setFetchedRecommended] = useState({});
+    const [fetchedFeatures, setFetchedFeatures] = useState({});
+    const [trackIDs, setTrackIDs] = useState([]);
     const [hasError, setErrors] = useState(false);
+
+    useEffect(() => {
+        let tmp = Object.values(fetchedRecommended);
+        
+        tmp = tmp.map( track => {
+            return track.id;
+        }).join(',');
+        
+        setTrackIDs(tmp);
+
+    }, [fetchedRecommended])
+
+    useEffect(() => {
+        fetchFeatures(
+            'https://api.spotify.com/v1/audio-features?', 
+            'ids=', 
+            trackIDs)
+
+    }, [trackIDs])
+    
+    async function fetchFeatures(endpointURL, queryParam, query) {
+        const token = Cookies.get('spotifyAuthToken'); 
+        
+        let fetchURL = endpointURL + queryParam + query;
+        
+        const res = await fetch(fetchURL, {
+            method: 'GET',
+            headers: {
+                "Content-Type":"application/json", 
+                "Authorization": "Bearer " + token
+            }
+        });
+        
+        res
+            .json()
+            .then(res => setFetchedFeatures(res.audio_features))
+            .catch(err => setErrors(err));
+    }
     
     return (
         <div>
@@ -59,7 +100,9 @@ function PlaylistBuilder(props) {
                 playlistTrackJSON={playlistTracksJSON}     
                 playlistTitle={playlistTitle}
                 spotifyURI={spotifyURI}
-                setFetchedData={setFetchedData}
+                setFetchedRecommended={setFetchedRecommended}
+                setFetchedFeatures={setFetchedFeatures}
+                trackIDs={trackIDs}
                 setErrors={setErrors}
             />
            
