@@ -37,6 +37,8 @@ function PlaylistBuilder(props) {
     const [count, setCount] = useState(0);
     const [tracks, setTracks] = useState([]);
     const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
+    const [fetchedData, setFetchedData] = useState({});
+    const [hasError, setErrors] = useState(false);
     
     return (
         <div>
@@ -53,7 +55,13 @@ function PlaylistBuilder(props) {
                 onChange={setSpotifyURI}
             />
 
-            <FinishButtons />
+            <FinishButtons 
+                playlistTrackJSON={playlistTracksJSON}     
+                playlistTitle={playlistTitle}
+                spotifyURI={spotifyURI}
+                setFetchedData={setFetchedData}
+                setErrors={setErrors}
+            />
            
             <ConfiguredTracks 
                 tracks={tracks}

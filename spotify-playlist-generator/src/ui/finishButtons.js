@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button'
+import Cookies from 'js-cookie'
 
 const useStyles = makeStyles({
     root: {
@@ -26,10 +27,34 @@ const useStyles = makeStyles({
 })
 
 function FinishButtons(props) {
-    const classes =useStyles();
+    const classes = useStyles();
+
+    async function fetchData(endpointURL, artistURI, limit, market) {
+        const token = Cookies.get('spotifyAuthToken'); 
+        let fetchURL = endpointURL + "limit=" + limit + "&market" 
+                        + market + "&seed_artists=" + artistURI;
+        
+        const res = await fetch(fetchURL, {
+            method: 'GET',
+            headers: {
+                "Content-Type":"application/json", 
+                "Authorization": "Bearer " + token
+            }
+        });
+        res
+            .json()
+            .then(res => props.setFetchedData(res))
+            .catch(err => props.setErrors(err));
+    }
+
 
     function buildPlaylist() {
         console.log('building playlist...');
+
+        fetchData(
+            'https://api.spotify.com/v1/recommendations?', 
+            props.spotifyURI, '5', 'US');
+
     }
 
     function savePlaylist() {
