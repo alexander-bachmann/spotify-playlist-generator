@@ -123,8 +123,8 @@ function PlaylistBuilder(props) {
                                                                 (playlistTrack.mode[1] >= fetchedTrack.mode)) {
 
                                                                     if(playlistTrack.key.length == 0 ||
-                                                                    (playlistTrack.key[0] <= fetchedTrack.key * 100) && 
-                                                                    (playlistTrack.key[1] >= fetchedTrack.key * 100)) {
+                                                                    (playlistTrack.key[0] <= fetchedTrack.key) && 
+                                                                    (playlistTrack.key[1] >= fetchedTrack.key)) {
 
                                                                         console.log('----');
                                                                         console.log('instrumentalness: ' + fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
@@ -139,7 +139,7 @@ function PlaylistBuilder(props) {
                                                                         console.log('energy: ' + fetchedTrack.energy * 100 + ' is within [' + playlistTrack.energy[0] + ',' + playlistTrack.energy[1] + ']');
                                                                         console.log('tempo: ' + fetchedTrack.tempo + ' is within [' + playlistTrack.tempo[0] + ',' + playlistTrack.tempo[1] + ']');
                                                                         console.log('mode: ' + fetchedTrack.mode + ' is within [' + playlistTrack.mode[0] + ',' + playlistTrack.mode[1] + ']');
-                                                                        console.log('key: ' + fetchedTrack.key * 100 + ' is within [' + playlistTrack.key[0] + ',' + playlistTrack.key[1] + ']');
+                                                                        console.log('key: ' + fetchedTrack.key + ' is within [' + playlistTrack.key[0] + ',' + playlistTrack.key[1] + ']');
 
                                                                     } else { break; }
                                                                 } else { break; }
