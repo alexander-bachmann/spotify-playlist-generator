@@ -5,49 +5,26 @@ import ConfiguredTracks from './configuredTracks';
 import FinishButtons from './finishButtons';
 import Cookies from 'js-cookie';
 import { useIsMount } from './useIsMount';
- /*
-        TODO probably need to add states for everything that may change such as titles 
-        
-            PlaylistBuilder
 
-                * InputBox (playlist title) - props: defaultText
-                * InputBox (artist spotify uri) - props: defaultText
-
-                ConfiguredTrack
-                    * Track Name (default until filled with title)
-                    * Settings Button
-                    * Trash Button
-
-                * TrackConfiguration  (will also be called when user selects settings cog)
-                    * Track title
-                    * Add Button (this button will generate a new Configured track component)
-                    * Reset Button
-                    * Features
-                        * Feature
-                            * Name    
-                            * Slider
-                            * Toggle Switch
-
-                * Build Button
-                * Save Button
-        */
-
+// 4frXpPxQQZwbCu3eTGnZEw - Thundercat
 
 function PlaylistBuilder(props) {
-    // 4frXpPxQQZwbCu3eTGnZEw
-
+    const isMount = useIsMount();
+    const [count, setCount] = useState(0);
+    // UI
     const [playlistTitle, setPlaylistTitle] =useState('');
     const [spotifyURI, setSpotifyURI] = useState('');
-    const [count, setCount] = useState(0);
     const [tracks, setTracks] = useState([]);
-    const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
+    // API Data
     const [fetchedRecommended, setFetchedRecommended] = useState({});
     const [trackIDs, setTrackIDs] = useState([]);
-    const [playlistIDs, setPlaylistIDs] = useState([]);
     const [fetchedFeatures, setFetchedFeatures] = useState(-1);
     const [hasError, setErrors] = useState(false);
-    const isMount = useIsMount();
+    // User Playlist
+    const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
+    const [playlistIDs, setPlaylistIDs] = useState([]);
 
+    // On retrieval of recommended tracks, extract track IDs
     useEffect(() => {
         if(fetchedRecommended) {
             if(fetchedRecommended === undefined) {
@@ -64,6 +41,7 @@ function PlaylistBuilder(props) {
 
     }, [fetchedRecommended])
 
+    // On extraction of track IDs, retrieve track features 
     useEffect(() => {
         fetchFeatures(
             'https://api.spotify.com/v1/audio-features?', 
@@ -72,6 +50,8 @@ function PlaylistBuilder(props) {
 
     }, [trackIDs])
 
+    // On retrieval of track features, compare against user's playlist criteria
+    // then extract valid track IDs
     useEffect(() => {
         // if isn't the first mount (should probably rename)
         if(!isMount && fetchedFeatures) { 
@@ -205,10 +185,6 @@ function PlaylistBuilder(props) {
     
     return (
         <div>
-            {/* these will be deleted.. they are just proof that state is being saved */}
-            <h5>{playlistTitle}</h5>
-            <h5>{spotifyURI}</h5>
-
             <TextInputField 
                 defaultText="Playlist Title"
                 onChange={setPlaylistTitle}
