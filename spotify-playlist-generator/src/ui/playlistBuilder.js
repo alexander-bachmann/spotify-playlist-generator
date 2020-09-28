@@ -76,115 +76,14 @@ function PlaylistBuilder(props) {
             for(let playlistTrack of playlistCriteria) {
                 for(let fetchedTrack of recommendedTracksFeatures) {
                     if(isValidTrack(playlistTrack, fetchedTrack)) {
-                        ids.push(fetchedTrack.id);
+                        if(ids.length < playlistCriteria.length && !ids.includes(fetchedTrack.id)) {
+                            ids.push(fetchedTrack.id);
+                        }
                     }
                 }
             }
             
             setPlaylistIDs(ids)
-
-
-
-        //     for(let playlistTrack of playlistCriteria) {
-        //         for(let fetchedTrack of recommendedTracksFeatures) {
-        //             if(fetchedTrack !== null) {
-        //                 if(playlistTrack.instrumentalness.length == 0 ||
-        //                 (playlistTrack.instrumentalness[0] <= fetchedTrack.instrumentalness * 100) && 
-        //                 (playlistTrack.instrumentalness[1] >= fetchedTrack.instrumentalness * 100)) {
-
-        //                     if(playlistTrack.timeSignature.length == 0 ||
-        //                     (playlistTrack.timeSignature[0] <= fetchedTrack.time_signature) && 
-        //                     (playlistTrack.timeSignature[1] >= fetchedTrack.time_signature)) {
-                            
-        //                         if(playlistTrack.acousticness.length == 0 ||
-        //                         (playlistTrack.acousticness[0] <= fetchedTrack.acousticness * 100) && 
-        //                         (playlistTrack.acousticness[1] >= fetchedTrack.acousticness * 100)) {
-                                                                
-        //                             if(playlistTrack.danceability.length == 0 ||
-        //                             (playlistTrack.danceability[0] <= fetchedTrack.danceability * 100) && 
-        //                             (playlistTrack.danceability[1] >= fetchedTrack.danceability * 100)) {
-
-        //                             if(playlistTrack.speechiness.length == 0 ||
-        //                                 (playlistTrack.speechiness[0] <= fetchedTrack.speechiness * 100) && 
-        //                                 (playlistTrack.speechiness[1] >= fetchedTrack.speechiness * 100)) {
-
-        //                                     if(playlistTrack.loudness.length == 0 ||
-        //                                     (playlistTrack.loudness[0] <= fetchedTrack.loudness) && 
-        //                                     (playlistTrack.loudness[1] >= fetchedTrack.loudness)) {
-
-        //                                         if(playlistTrack.liveness.length == 0 ||
-        //                                         (playlistTrack.liveness[0] <= fetchedTrack.liveness * 100) && 
-        //                                         (playlistTrack.liveness[1] >= fetchedTrack.liveness * 100)) {
-
-        //                                             if(playlistTrack.duration.length == 0 ||
-        //                                             (playlistTrack.duration[0] <= fetchedTrack.duration_ms / 60000) && 
-        //                                             (playlistTrack.duration[1] >= fetchedTrack.duration_ms / 60000)) {
-
-        //                                                 if(playlistTrack.valence.length == 0 ||
-        //                                                 (playlistTrack.valence[0] <= fetchedTrack.valence * 100) && 
-        //                                                 (playlistTrack.valence[1] >= fetchedTrack.valence * 100)) {
-
-        //                                                     if(playlistTrack.energy.length == 0 ||
-        //                                                     (playlistTrack.energy[0] <= fetchedTrack.energy * 100) && 
-        //                                                     (playlistTrack.energy[1] >= fetchedTrack.energy * 100)) {
-
-        //                                                         if(playlistTrack.tempo.length == 0 ||
-        //                                                         (playlistTrack.tempo[0] <= fetchedTrack.tempo) && 
-        //                                                         (playlistTrack.tempo[1] >= fetchedTrack.tempo)) {
-
-        //                                                             if(playlistTrack.mode.length == 0 ||
-        //                                                             (playlistTrack.mode[0] <= fetchedTrack.mode) && 
-        //                                                             (playlistTrack.mode[1] >= fetchedTrack.mode)) {
-
-        //                                                                 if(playlistTrack.key.length == 0 ||
-        //                                                                 (playlistTrack.key[0] <= fetchedTrack.key) && 
-        //                                                                 (playlistTrack.key[1] >= fetchedTrack.key)) {
-
-        //                                                                     console.log('----');
-        //                                                                     console.log('instrumentalness: ' + fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
-        //                                                                     console.log('time_signature: ' + fetchedTrack.time_signature + ' is within [' + playlistTrack.timeSignature[0] + ',' + playlistTrack.timeSignature[1] + ']');
-        //                                                                     console.log('acousticness: ' + fetchedTrack.acousticness * 100 + ' is within [' + playlistTrack.acousticness[0] + ',' + playlistTrack.acousticness[1] + ']');
-        //                                                                     console.log('danceability: ' + fetchedTrack.danceability * 100 + ' is within [' + playlistTrack.danceability[0] + ',' + playlistTrack.danceability[1] + ']');
-        //                                                                     console.log('speechiness: ' + fetchedTrack.speechiness * 100 + ' is within [' + playlistTrack.speechiness[0] + ',' + playlistTrack.speechiness[1] + ']');
-        //                                                                     console.log('loudness: ' + fetchedTrack.loudness + ' is within [' + playlistTrack.loudness[0] + ',' + playlistTrack.loudness[1] + ']');
-        //                                                                     console.log('liveness: ' + fetchedTrack.liveness * 100 + ' is within [' + playlistTrack.liveness[0] + ',' + playlistTrack.liveness[1] + ']');
-        //                                                                     console.log('duration_ms: ' + fetchedTrack.duration_ms / 60000 + ' is within [' + playlistTrack.duration[0] + ',' + playlistTrack.duration[1] + ']');
-        //                                                                     console.log('valence: ' + fetchedTrack.valence * 100 + ' is within [' + playlistTrack.valence[0] + ',' + playlistTrack.valence[1] + ']');
-        //                                                                     console.log('energy: ' + fetchedTrack.energy * 100 + ' is within [' + playlistTrack.energy[0] + ',' + playlistTrack.energy[1] + ']');
-        //                                                                     console.log('tempo: ' + fetchedTrack.tempo + ' is within [' + playlistTrack.tempo[0] + ',' + playlistTrack.tempo[1] + ']');
-        //                                                                     console.log('mode: ' + fetchedTrack.mode + ' is within [' + playlistTrack.mode[0] + ',' + playlistTrack.mode[1] + ']');
-        //                                                                     console.log('key: ' + fetchedTrack.key + ' is within [' + playlistTrack.key[0] + ',' + playlistTrack.key[1] + ']');
-
-        //                                                                     if(ids.length < playlistCriteria.length ) {
-        //                                                                         if(!ids.includes(fetchedTrack.id)) {
-        //                                                                             ids.push(fetchedTrack.id);
-        //                                                                             console.log(playlistCriteria.length);
-        //                                                                         }
-        //                                                                     }
-        //                                                                }
-        //                                                             } else { break; }
-        //                                                         } else { break; }
-        //                                                     } else { break; }
-        //                                                 } else { break; }
-        //                                             } else { break; }
-        //                                         } else { break; }
-        //                                     } else { break; }
-        //                                 } else { break; }
-        //                             } else { break; }
-        //                         } else { break; }
-        //                     } else { break; }
-        //                 } else { break; }
-        //             }
-                    
-        //             if(ids.length < playlistCriteria.length) {
-        //                 ids.push('Track not found...');
-        //             }
-        //         }
-        //     }
-
-            // setPlaylistIDs(ids)
-        //     // setPlaylistIDs([...playlistIDs, ids]);
-        //     // console.log(ids);
         }
 
     }, [fetchedFeatures]);
@@ -241,6 +140,20 @@ function PlaylistBuilder(props) {
                                                         if(playlistTrack.key.length == 0 ||
                                                         (playlistTrack.key[0] <= fetchedTrack.key) && 
                                                         (playlistTrack.key[1] >= fetchedTrack.key)) {
+                                                            // console.log('----');
+                                                            // console.log('instrumentalness: ' + fetchedTrack.instrumentalness * 100 + ' is within [' + playlistTrack.instrumentalness[0] + ',' + playlistTrack.instrumentalness[1] + ']');
+                                                            // console.log('time_signature: ' + fetchedTrack.time_signature + ' is within [' + playlistTrack.timeSignature[0] + ',' + playlistTrack.timeSignature[1] + ']');
+                                                            // console.log('acousticness: ' + fetchedTrack.acousticness * 100 + ' is within [' + playlistTrack.acousticness[0] + ',' + playlistTrack.acousticness[1] + ']');
+                                                            // console.log('danceability: ' + fetchedTrack.danceability * 100 + ' is within [' + playlistTrack.danceability[0] + ',' + playlistTrack.danceability[1] + ']');
+                                                            // console.log('speechiness: ' + fetchedTrack.speechiness * 100 + ' is within [' + playlistTrack.speechiness[0] + ',' + playlistTrack.speechiness[1] + ']');
+                                                            // console.log('loudness: ' + fetchedTrack.loudness + ' is within [' + playlistTrack.loudness[0] + ',' + playlistTrack.loudness[1] + ']');
+                                                            // console.log('liveness: ' + fetchedTrack.liveness * 100 + ' is within [' + playlistTrack.liveness[0] + ',' + playlistTrack.liveness[1] + ']');
+                                                            // console.log('duration_ms: ' + fetchedTrack.duration_ms / 60000 + ' is within [' + playlistTrack.duration[0] + ',' + playlistTrack.duration[1] + ']');
+                                                            // console.log('valence: ' + fetchedTrack.valence * 100 + ' is within [' + playlistTrack.valence[0] + ',' + playlistTrack.valence[1] + ']');
+                                                            // console.log('energy: ' + fetchedTrack.energy * 100 + ' is within [' + playlistTrack.energy[0] + ',' + playlistTrack.energy[1] + ']');
+                                                            // console.log('tempo: ' + fetchedTrack.tempo + ' is within [' + playlistTrack.tempo[0] + ',' + playlistTrack.tempo[1] + ']');
+                                                            // console.log('mode: ' + fetchedTrack.mode + ' is within [' + playlistTrack.mode[0] + ',' + playlistTrack.mode[1] + ']');
+                                                            // console.log('key: ' + fetchedTrack.key + ' is within [' + playlistTrack.key[0] + ',' + playlistTrack.key[1] + ']');
 
                                                             return true; 
                                                         }
