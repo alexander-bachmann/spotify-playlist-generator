@@ -68,24 +68,30 @@ function PlaylistBuilder(props) {
     useEffect(() => {
 
         return () => { 
-
             let recommendedTracksFeatures = Array.from(fetchedFeatures);
             let playlistCriteria = Array.from(playlistTracksJSON);
             let ids = [];
 
             for(let playlistTrack of playlistCriteria) {
+                let trackFound = false;
+
                 for(let fetchedTrack of recommendedTracksFeatures) {
                     if(isValidTrack(playlistTrack, fetchedTrack)) {
-                        if(ids.length < playlistCriteria.length && !ids.includes(fetchedTrack.id)) {
+                        if(!ids.includes(fetchedTrack.id)) {
                             ids.push(fetchedTrack.id);
+                            trackFound = true;
+                            break;
                         }
                     }
+                }
+                
+                if(!trackFound) {
+                    ids.push('Track 404');
                 }
             }
             
             setPlaylistIDs(ids)
         }
-
     }, [fetchedFeatures]);
 
     function isValidTrack(playlistTrack, fetchedTrack) {
