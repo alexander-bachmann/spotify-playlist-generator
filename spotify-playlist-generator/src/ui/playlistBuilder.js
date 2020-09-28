@@ -3,6 +3,7 @@ import TextInputField from './textInputField';
 import TrackConfiguration from './trackConfiguration';
 import ConfiguredTracks from './configuredTracks';
 import FinishButtons from './finishButtons';
+import { useIsMount } from './useIsMount';
 import Cookies from 'js-cookie'
  /*
         TODO probably need to add states for everything that may change such as titles 
@@ -33,6 +34,9 @@ import Cookies from 'js-cookie'
 
 
 function PlaylistBuilder(props) {
+
+    const isMount = useIsMount();
+
     const [playlistTitle, setPlaylistTitle] =useState('');
     const [spotifyURI, setSpotifyURI] = useState('');
     const [count, setCount] = useState(0);
@@ -66,8 +70,8 @@ function PlaylistBuilder(props) {
     }, [trackIDs])
 
     useEffect(() => {
-
-        return () => { 
+        // if isn't the first mount (should probably rename)
+        if(!isMount) { 
             let recommendedTracksFeatures = Array.from(fetchedFeatures);
             let playlistCriteria = Array.from(playlistTracksJSON);
             let ids = [];
@@ -176,9 +180,6 @@ function PlaylistBuilder(props) {
             } else { return false; }
         } else { return false; }
     }
-
-
-
     
     async function fetchFeatures(endpointURL, queryParam, query) {
         const token = Cookies.get('spotifyAuthToken'); 
