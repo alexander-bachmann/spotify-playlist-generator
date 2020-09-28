@@ -3,8 +3,8 @@ import TextInputField from './textInputField';
 import TrackConfiguration from './trackConfiguration';
 import ConfiguredTracks from './configuredTracks';
 import FinishButtons from './finishButtons';
+import Cookies from 'js-cookie';
 import { useIsMount } from './useIsMount';
-import Cookies from 'js-cookie'
  /*
         TODO probably need to add states for everything that may change such as titles 
         
@@ -34,8 +34,7 @@ import Cookies from 'js-cookie'
 
 
 function PlaylistBuilder(props) {
-
-    const isMount = useIsMount();
+    // 4frXpPxQQZwbCu3eTGnZEw
 
     const [playlistTitle, setPlaylistTitle] =useState('');
     const [spotifyURI, setSpotifyURI] = useState('');
@@ -45,19 +44,23 @@ function PlaylistBuilder(props) {
     const [fetchedRecommended, setFetchedRecommended] = useState({});
     const [trackIDs, setTrackIDs] = useState([]);
     const [playlistIDs, setPlaylistIDs] = useState([]);
-
     const [fetchedFeatures, setFetchedFeatures] = useState(-1);
-
     const [hasError, setErrors] = useState(false);
+    const isMount = useIsMount();
 
     useEffect(() => {
-        let tmp = Object.values(fetchedRecommended);
-        
-        tmp = tmp.map( track => {
-            return track.id;
-        }).join(',');
-        
-        setTrackIDs(tmp);
+        if(fetchedRecommended) {
+            if(fetchedRecommended === undefined) {
+                setFetchedRecommended({});
+            }
+            
+            let tmp = Object.values(fetchedRecommended);
+            tmp = tmp.map( track => {
+                return track.id;
+            }).join(',');
+
+            setTrackIDs(tmp);
+        }
 
     }, [fetchedRecommended])
 
@@ -71,7 +74,7 @@ function PlaylistBuilder(props) {
 
     useEffect(() => {
         // if isn't the first mount (should probably rename)
-        if(!isMount) { 
+        if(!isMount && fetchedFeatures) { 
             let recommendedTracksFeatures = Array.from(fetchedFeatures);
             let playlistCriteria = Array.from(playlistTracksJSON);
             let ids = [];

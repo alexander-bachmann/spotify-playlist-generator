@@ -49,8 +49,6 @@ function FinishButtons(props) {
     }
     
     function buildPlaylist() {
-        console.log('building playlist...');
-
         fetchRecommended(
             'https://api.spotify.com/v1/recommendations?', 
             'seed_artists=', 
