@@ -18,25 +18,42 @@ function PlaylistBuilder(props) {
     // API Data
     const [fetchedRecommended, setFetchedRecommended] = useState({});
     const [trackIDs, setTrackIDs] = useState([]);
+    const [fetchedTitles, setFetchedTitles] = useState([]);
+    const [fetchedArtists, setFetchedArtists] = useState([]);
     const [fetchedFeatures, setFetchedFeatures] = useState(-1);
     const [hasError, setErrors] = useState(false);
     // User Playlist
     const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
     const [playlistIDs, setPlaylistIDs] = useState([]);
+    const [playlistTitles, setPlaylistTitles] = useState([]);
+    const [playlistArtists, setPlaylistArtists] = useState([]);
 
-    // On retrieval of recommended tracks, extract track IDs
+    // On retrieval of recommended tracks, extract track IDs, titles, and artists
     useEffect(() => {
         if(fetchedRecommended) {
             if(fetchedRecommended === undefined) {
                 setFetchedRecommended({});
             }
             
-            let tmp = Object.values(fetchedRecommended);
-            tmp = tmp.map( track => {
+            let recommended = Object.values(fetchedRecommended);
+
+            let ids = recommended.map( track => {
                 return track.id;
             }).join(',');
 
-            setTrackIDs(tmp);
+            setTrackIDs(ids);
+
+            let titles = recommended.map( track => {
+                return track.name;
+            });
+
+            setFetchedTitles(titles);
+
+            let artists = recommended.map( track => {
+                return track.artists[0].name;
+            });
+
+            setFetchedArtists(artists);
         }
 
     }, [fetchedRecommended])
@@ -55,29 +72,39 @@ function PlaylistBuilder(props) {
     useEffect(() => {
         // if isn't the first mount (should probably rename)
         if(!isMount && fetchedFeatures) { 
+            let recommendedTracks = Array.from(fetchedRecommended);
             let recommendedTracksFeatures = Array.from(fetchedFeatures);
             let playlistCriteria = Array.from(playlistTracksJSON);
             let ids = [];
+            let titles = [];
+            let artists = [];
 
             for(let playlistTrack of playlistCriteria) {
                 let trackFound = false;
+                let i = 0;
 
                 for(let fetchedTrack of recommendedTracksFeatures) {
                     if(isValidTrack(playlistTrack, fetchedTrack)) {
                         if(!ids.includes(fetchedTrack.id)) {
                             ids.push(fetchedTrack.id);
+                            titles.push(fetchedTitles[i]);
+                            artists.push(fetchedArtists[i]);
                             trackFound = true;
                             break;
                         }
                     }
+                    i++;
                 }
                 
                 if(!trackFound) {
                     ids.push('Track 404');
+                    titles.push('Track 404');
                 }
             }
             
-            setPlaylistIDs(ids)
+            setPlaylistIDs(ids);
+            setPlaylistTitles(titles);
+            setPlaylistArtists(artists);
         }
     }, [fetchedFeatures]);
 
