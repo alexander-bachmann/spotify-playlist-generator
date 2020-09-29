@@ -72,7 +72,6 @@ function PlaylistBuilder(props) {
     useEffect(() => {
         // if isn't the first mount (should probably rename)
         if(!isMount && fetchedFeatures) { 
-            let recommendedTracks = Array.from(fetchedRecommended);
             let recommendedTracksFeatures = Array.from(fetchedFeatures);
             let playlistCriteria = Array.from(playlistTracksJSON);
             let ids = [];
@@ -99,6 +98,7 @@ function PlaylistBuilder(props) {
                 if(!trackFound) {
                     ids.push('Track 404');
                     titles.push('Track 404');
+                    artists.push('Track 404');
                 }
             }
             
@@ -237,10 +237,15 @@ function PlaylistBuilder(props) {
             />
 
             <TrackConfiguration 
-                trackTitle={"Track " + `${count + 1}`} 
+                trackTitle={"Track " + `${count + 1}`}
                 setTracks={setTracks}
                 setPlaylistTracksJSON={setPlaylistTracksJSON}
+                count={count}
                 setCount={setCount}
+                playlistTitles={playlistTitles}
+                setPlaylistTitles={setPlaylistTitles}
+                playlistArtists={playlistArtists}
+                setPlaylistArtists={setPlaylistArtists}
             />
         </div>
     );
