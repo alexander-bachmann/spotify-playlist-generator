@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useIsMount } from './useIsMount';
 
 const useStyles = makeStyles({
     root: {
@@ -35,6 +36,10 @@ const useStyles = makeStyles({
 function ConfiguredTrack(props) {
     const classes = useStyles();
 
+    const [title, setTitle] = useState('.');
+    console.log(props.trackTitle);
+
+
     function changeTrack() {
         console.log('changing track...');
     }
@@ -45,11 +50,12 @@ function ConfiguredTrack(props) {
             track => track.props.UID !== props.UID));
         props.setPlaylistTracksJSON(tracks => tracks.filter(
             track => track.uid !== props.UID));
+        // TODO ... need to update to delete from all the new state arrays
     }
     
     return(
         <div name={props.UID} className={classes.root}>
-            <span className={classes.trackTitle}>{props.trackTitle}</span>
+            <span className={classes.trackTitle}>{title}</span>
             
             <IconButton 
                     className={classes.deleteButton}

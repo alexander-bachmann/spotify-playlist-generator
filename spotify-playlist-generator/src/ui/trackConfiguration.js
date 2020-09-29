@@ -37,6 +37,8 @@ const useStyles = makeStyles({
 
 function TrackConfiguration(props) {
     const classes = useStyles();
+
+    const [trackTitles, setTrackTitles] = useState(props.playlistTitles);
    
     const [instrumentalness, setInstrumentalness] = useState([]);
     const [timeSignature, setTimeSignature] = useState([]);
@@ -55,19 +57,17 @@ function TrackConfiguration(props) {
     function addTrack() {
         let UID = nextId();
 
+        // props.setPlaylistTitles(playlistTitles => [...playlistTitles, 
+        //     "Track " + `${props.count + 1}`]);
+        // props.setPlaylistArtists(playlistArtists => [...playlistArtists,
+        //     "Artist " + `${props.count + 1}`]);
         props.setCount(count => count + 1);
-        props.setTracks( tracks => [...tracks, 
-            <ConfiguredTrack 
-                trackTitle={props.trackTitle}
-                setTracks={props.setTracks}
-                setCount={props.setCount}
-                setPlaylistTracksJSON={props.setPlaylistTracksJSON}
-                UID={UID}
-            />]);
         
         props.setPlaylistTracksJSON( 
             trackFeatures => [...trackFeatures, {
                 'uid': UID,
+                'title': "Track " + `${props.count + 1}`,
+                'artist': "Artist " + `${props.count + 1}`,
                 'instrumentalness': instrumentalness,
                 'timeSignature': timeSignature,
                 'acousticness': acousticness,
@@ -83,6 +83,22 @@ function TrackConfiguration(props) {
                 'key': key
                 }
             ]);
+
+        props.setTracks( tracks => [...tracks, 
+            <ConfiguredTrack 
+                // trackTitle={trackTitles}
+                trackTitle={props.playlistTracksJSON.filter(track => track.uid !== UID)}
+                setTracks={props.setTracks}
+                count={props.count}
+                setCount={props.setCount}
+
+                // playlistTitles={props.playlistTitles}
+                setPlaylistTracksJSON={props.setPlaylistTracksJSON}
+                UID={UID}
+            />]);
+
+        
+        
     }
 
     // function clearTrack() {
