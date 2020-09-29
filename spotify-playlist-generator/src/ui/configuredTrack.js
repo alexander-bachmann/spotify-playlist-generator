@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, forwardRef, useImperativeHandle }from 'react';
 import { makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -33,11 +33,23 @@ const useStyles = makeStyles({
     }
 })
 
-function ConfiguredTrack(props) {
+// function ConfiguredTrack(props) {
+const ConfiguredTrack = forwardRef((props, ref) => {
     const classes = useStyles();
 
     const [title, setTitle] = useState('.');
-    console.log(props.trackTitle);
+
+    const updateTitle = (newTitle) => {
+        setTitle(newTitle);
+    };
+
+    useImperativeHandle(ref, () => {
+        return {
+            updateTitle: updateTitle
+        };
+    });
+
+    
 
 
     function changeTrack() {
@@ -72,6 +84,7 @@ function ConfiguredTrack(props) {
             ><SettingsIcon/></IconButton>
         </div>
     )
-}
+});
+// };
 
 export default ConfiguredTrack;

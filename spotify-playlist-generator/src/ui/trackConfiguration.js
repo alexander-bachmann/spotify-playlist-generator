@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect, useRef }from 'react';
 import Features from './features';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -53,9 +53,17 @@ function TrackConfiguration(props) {
     const [tempo, setTempo] = useState([]);
     const [mode, setMode] = useState([]);
     const [key, setKey] = useState([]);
+    
+    // const ref = useRef(null);
+        
+    // const updateTrackTitle = (newTitle) => {
+    //     ref.current.updateTitle(newTitle);
+    // }
 
     function addTrack() {
         let UID = nextId();
+    
+        // updateTrackTitle(UID);  
 
         // props.setPlaylistTitles(playlistTitles => [...playlistTitles, 
         //     "Track " + `${props.count + 1}`]);
@@ -87,6 +95,7 @@ function TrackConfiguration(props) {
         props.setTracks( tracks => [...tracks, 
             <ConfiguredTrack 
                 // trackTitle={trackTitles}
+                ref={props.ref}
                 trackTitle={props.playlistTracksJSON.filter(track => track.uid !== UID)}
                 setTracks={props.setTracks}
                 count={props.count}

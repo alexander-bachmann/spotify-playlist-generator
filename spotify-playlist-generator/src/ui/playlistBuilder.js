@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect, useRef }from 'react';
 import TextInputField from './textInputField';
 import TrackConfiguration from './trackConfiguration';
 import ConfiguredTracks from './configuredTracks';
@@ -27,6 +27,12 @@ function PlaylistBuilder(props) {
     const [playlistIDs, setPlaylistIDs] = useState([]);
     // const [playlistTitles, setPlaylistTitles] = useState([]);
     // const [playlistArtists, setPlaylistArtists] = useState([]);
+
+    const ref = useRef(null);
+        
+    const updateTrackTitle = () => {
+        ref.current.updateTitle('test1');
+    }
 
     // On retrieval of recommended tracks, extract track IDs, titles, and artists
     useEffect(() => {
@@ -120,6 +126,18 @@ function PlaylistBuilder(props) {
             // console.log(playlistJSON);
         }
     }, [fetchedFeatures]);
+
+    useEffect(() => {
+        console.log('playlistTracksJSON updated');
+
+        let playlistJSON = [...playlistTracksJSON];
+
+        // TODO refs broken
+        // updateTrackTitle('test');
+        
+        console.log(tracks);
+
+    }, [playlistTracksJSON]);
 
     function isValidTrack(playlistTrack, fetchedTrack) {
         if(playlistTrack.instrumentalness.length == 0 ||
@@ -222,6 +240,11 @@ function PlaylistBuilder(props) {
             .then(res => setFetchedFeatures(res.audio_features))
             .catch(err => setErrors(err));
     }
+
+
+    
+
+    
     
     return (
         <div>
@@ -250,6 +273,7 @@ function PlaylistBuilder(props) {
             />
 
             <TrackConfiguration 
+                ref={ref}
                 trackTitle={"Track " + `${count + 1}`}
                 setTracks={setTracks}
                 playlistTracksJSON={playlistTracksJSON}
