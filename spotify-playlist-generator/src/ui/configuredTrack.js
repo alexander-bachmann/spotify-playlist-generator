@@ -51,6 +51,7 @@ const ConfiguredTrack = props => {
         console.log('changing track...');
     }
 
+    // TODO delete shouldn't delete but instead reject the track chosen to fill the criteria
     function deleteTrack() {
         props.setCount(count => count - 1);
         props.setTracks(tracks => tracks.filter(
