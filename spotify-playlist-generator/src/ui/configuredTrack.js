@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext }from 'react';
-import { Context } from './Store';
+import { Context } from './global/Store';
 import { makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';

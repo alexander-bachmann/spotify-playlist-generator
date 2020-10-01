@@ -7,7 +7,7 @@ import ConfiguredTrack from './configuredTrack';
 import Cookies from 'js-cookie';
 import { useIsMount } from './useIsMount';
 import nextId from 'react-id-generator';
-import { Context } from './Store';
+import { Context } from './global/Store';
 
 // 4frXpPxQQZwbCu3eTGnZEw - Thundercat
 
