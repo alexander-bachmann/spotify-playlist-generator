@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef }from 'react';
+import React, { useState } from 'react';
 import Features from './features';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-import ClearIcon from '@material-ui/icons/Clear';
-import ConfiguredTrack from './configuredTrack';
 import nextId from 'react-id-generator';
 
 const useStyles = makeStyles({
@@ -37,8 +35,6 @@ const useStyles = makeStyles({
 
 function TrackConfiguration(props) {
     const classes = useStyles();
-
-    const [trackTitles, setTrackTitles] = useState(props.playlistTitles);
    
     const [instrumentalness, setInstrumentalness] = useState([]);
     const [timeSignature, setTimeSignature] = useState([]);
@@ -54,25 +50,10 @@ function TrackConfiguration(props) {
     const [mode, setMode] = useState([]);
     const [key, setKey] = useState([]);
     
-    // const ref = useRef(null);
-        
-    // const updateTrackTitle = (newTitle) => {
-    //     ref.current.updateTitle(newTitle);
-    // }
-
     function addTrack() {
         let UID = nextId();
     
-        // updateTrackTitle(UID);  
-
-        // props.setPlaylistTitles(playlistTitles => [...playlistTitles, 
-        //     "Track " + `${props.count + 1}`]);
-        // props.setPlaylistArtists(playlistArtists => [...playlistArtists,
-        //     "Artist " + `${props.count + 1}`]);
-        // props.setCount(count => count + 1);
-
         props.addTrack(UID);
-
         
         props.setPlaylistTracksJSON( 
             trackFeatures => [...trackFeatures, {
@@ -94,41 +75,13 @@ function TrackConfiguration(props) {
                 'key': key
                 }
             ]);
-
-        // props.setTracks( tracks => [...tracks, 
-        //     <ConfiguredTrack 
-        //         // trackTitle={trackTitles}
-        //         ref={props.ref}
-        //         trackTitle={props.playlistTracksJSON.filter(track => track.uid !== UID)}
-        //         setTracks={props.setTracks}
-        //         count={props.count}
-        //         setCount={props.setCount}
-
-        //         // playlistTitles={props.playlistTitles}
-        //         setPlaylistTracksJSON={props.setPlaylistTracksJSON}
-        //         UID={UID}
-        //     />]);
-
-        
-        
     }
-
-    // function clearTrack() {
-    //     console.log('track cleared');
-    // }   
 
     return (
         <div>
             <div className={classes.root}>
 
                 <span className={classes.trackTitle}>{props.trackTitle}</span>
-                
-                {/* <IconButton 
-                    className={classes.resetButton}
-                    size="small"
-                    aria-label="clear"
-                    onClick={clearTrack}
-                ><ClearIcon/></IconButton> */}
                
                 <IconButton 
                     className={classes.addButton}

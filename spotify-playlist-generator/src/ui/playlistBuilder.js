@@ -28,7 +28,6 @@ function PlaylistBuilder(props) {
     const [hasError, setErrors] = useState(false);
     // User Playlist
     const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
-    const [playlistIDs, setPlaylistIDs] = useState([]);
 
     // On retrieval of recommended tracks, extract track IDs, titles, and artists
     useEffect(() => {
@@ -77,9 +76,6 @@ function PlaylistBuilder(props) {
             let recommendedTracksFeatures = Array.from(fetchedFeatures);
             let playlistCriteria = Array.from(playlistTracksJSON);
             let ids = [];
-            //will probably delete titles and artists []'s
-            // let titles = [];
-            // let artists = [];
             let playlistJSON = [...playlistTracksJSON];
 
             let numTrack = 0;
@@ -92,21 +88,19 @@ function PlaylistBuilder(props) {
                     if(isValidTrack(playlistTrack, fetchedTrack)) {
                         if(!ids.includes(fetchedTrack.id)) {
                             ids.push(fetchedTrack.id);
-                            // titles.push(fetchedTitles[i]);
-                            // artists.push(fetchedArtists[i]);
                             playlistJSON[numTrack].title = fetchedTitles[i];
                             playlistJSON[numTrack].artist = fetchedArtists[i];
+                            playlistJSON[numTrack].id = ids[numTrack];
+
                             trackFound = true;
                             break;
                         }
                     }
                     i++;
                 }
-                
+
                 if(!trackFound) {
-                    ids.push('Track 404');
-                    // titles.push('Title 404');
-                    // artists.push('Artist 404');
+                    playlistJSON[numTrack].id = 'ID 404';
                     playlistJSON[numTrack].title = 'Title 404';
                     playlistJSON[numTrack].artist = 'Artist 404';
                 }
@@ -114,12 +108,7 @@ function PlaylistBuilder(props) {
                 numTrack++;
             }
             
-            setPlaylistIDs(ids);
-            // setPlaylistTitles(titles);
-            // setPlaylistArtists(artists);
             setPlaylistTracksJSON(playlistJSON);
-
-            // console.log(playlistJSON);
         }
     }, [fetchedFeatures]);
 

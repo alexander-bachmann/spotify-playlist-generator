@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext }from 'react';
+import { Context } from './Store';
 import { makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Context } from './Store';
 
 const useStyles = makeStyles({
     root: {
@@ -57,7 +57,6 @@ const ConfiguredTrack = props => {
             track => track.props.UID !== props.UID));
         props.setPlaylistTracksJSON(tracks => tracks.filter(
             track => track.uid !== props.UID));
-        // TODO ... need to update to delete from all the new state arrays
     }
     
     return(
