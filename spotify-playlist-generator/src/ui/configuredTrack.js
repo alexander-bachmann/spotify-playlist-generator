@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const useStyles = makeStyles({
     root: {
@@ -26,6 +27,14 @@ const useStyles = makeStyles({
             backgroundColor: "#FE6B8B",
         }
     },
+    clearButton: {
+        color: 'white',
+        float: 'right',
+        backgroundColor: '#555555',
+        '&:hover': {
+            backgroundColor: "#FE6B8B",
+        }
+    },
     trackTitle: {
         float: 'left',
         fontSize: '1.2rem',
@@ -37,31 +46,33 @@ const ConfiguredTrack = props => {
     const classes = useStyles();
     
     const [state, dispatch] = useContext(Context);
-    const [title, setTitle] = useState(state.count);
+    const [title, setTitle] = useState('.');
+    const [UID, setUID] = useState(props.UID);
 
     useEffect(() => {
-        if(state.tracks[props.count]) {
-            setTitle(state.tracks[props.count].title + ' - ' + 
-                state.tracks[props.count].artist);
-            console.log(state.tracks[props.count].title);
-        }
+        // if(state.tracks.length > 0) {
+            let trackData = state.tracks.filter(track => track.uid === UID);
+
+            if(trackData[0] != undefined) {
+                setTitle(trackData[0].title + ' - ' + trackData[0].artist);
+            }
+        // }
     }, [state])
     
-    function changeTrack() {
-        console.log('changing track...');
+    function updateTrackConfiguration() {
+        console.log('changing track criteria...');
     }
 
-    // TODO delete shouldn't delete but instead reject the track chosen to fill the criteria
+    function clearFetchedTrack() {
+        console.log('clearing fetched track...');
+    }
+
     function deleteTrack() {
-        props.setCount(count => count - 1);
-        props.setTracks(tracks => tracks.filter(
-            track => track.props.UID !== props.UID));
-        props.setPlaylistTracksJSON(tracks => tracks.filter(
-            track => track.uid !== props.UID));
+        props.deleteTrack(UID);
     }
     
     return(
-        <div name={props.UID} className={classes.root}>
+        <div name={UID} className={classes.root}>
             <span className={classes.trackTitle}>{title}</span>
             
             <IconButton 
@@ -72,10 +83,17 @@ const ConfiguredTrack = props => {
             ><DeleteIcon/></IconButton>
 
             <IconButton 
+                className={classes.clearButton}
+                size="small"
+                aria-label="Clear"
+                onClick={clearFetchedTrack}
+            ><ClearIcon/></IconButton>
+
+            <IconButton 
                     className={classes.settingsButton}
                     size="small"
-                    aria-label="settings"
-                    onClick={changeTrack}
+                    aria-label="Settings"
+                    onClick={updateTrackConfiguration}
             ><SettingsIcon/></IconButton>
         </div>
     )

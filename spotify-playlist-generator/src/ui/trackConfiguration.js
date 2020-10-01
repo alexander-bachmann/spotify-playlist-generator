@@ -58,8 +58,8 @@ function TrackConfiguration(props) {
         props.setPlaylistTracksJSON( 
             trackFeatures => [...trackFeatures, {
                 'uid': UID,
-                'title': "Track " + `${props.count + 1}`,
-                'artist': "Artist " + `${props.count + 1}`,
+                'title': "Track " + `${UID}`,
+                'artist': "Artist " + `${UID}`,
                 'instrumentalness': instrumentalness,
                 'timeSignature': timeSignature,
                 'acousticness': acousticness,

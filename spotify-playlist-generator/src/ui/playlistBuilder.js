@@ -6,14 +6,13 @@ import FinishButtons from './finishButtons';
 import ConfiguredTrack from './configuredTrack';
 import Cookies from 'js-cookie';
 import { useIsMount } from './useIsMount';
-import nextId from 'react-id-generator';
 import { Context } from './global/Store';
 
 // 4frXpPxQQZwbCu3eTGnZEw - Thundercat
 
 function PlaylistBuilder(props) {
     const isMount = useIsMount();
-    const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
     const [state, dispatch] = useContext(Context);
     // UI
     const [playlistTitle, setPlaylistTitle] =useState('');
@@ -222,15 +221,18 @@ function PlaylistBuilder(props) {
     }
 
     function addTrack(UID) {
-        setCount(count => count + 1);
         setTracks( tracks => [...tracks, 
             <ConfiguredTrack 
                 UID={UID}
-                count={count}
-                setCount={setCount}
-                setTracks={setTracks}
-                setPlaylistTracksJSON={setPlaylistTracksJSON}
+                deleteTrack={deleteTrack}
             />]);
+    }
+
+    function deleteTrack(UID) {
+        setPlaylistTracksJSON(tracks => tracks.filter(
+            track => track.uid !== UID));
+        setTracks(tracks => tracks.filter(
+            track => track.props.UID !== UID));
     }
 
     return (
@@ -260,12 +262,9 @@ function PlaylistBuilder(props) {
 
             <TrackConfiguration 
                 addTrack={addTrack}
-                trackTitle={"Track " + `${count + 1}`}
-                // setTracks={setTracks}
-                playlistTracksJSON={playlistTracksJSON}
+                trackTitle="New Track"
+                // playlistTracksJSON={playlistTracksJSON}
                 setPlaylistTracksJSON={setPlaylistTracksJSON}
-                count={count}
-                setCount={setCount}
             />
         </div>
     );
