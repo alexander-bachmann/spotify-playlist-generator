@@ -14,7 +14,7 @@ function PlaylistBuilder(props) {
     const isMount = useIsMount();
     const [state, dispatch] = useContext(Context);
     // UI
-    const [playlistTitle, setPlaylistTitle] =useState('');
+    const [playlistTitle, setPlaylistTitle] = useState('');
     const [spotifyURI, setSpotifyURI] = useState('');
     const [tracks, setTracks] = useState([]);
     // API Data

@@ -51,7 +51,51 @@ function FinishButtons(props) {
             .catch(err => props.setErrors(err));
     }
 
-    
+    async function createPlaylist() {
+        const token = Cookies.get('spotifyAuthToken'); 
+        let fetchURL = `https://api.spotify.com/v1/users/${state.user_id}/playlists`;
+        
+        let reqBody = {
+            "name": props.playlistTitle 
+        }
+
+        const res = await fetch(fetchURL, {
+            method: 'POST',
+            headers: {
+                "Content-Type":"application/json", 
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(reqBody),
+        });
+        
+        res
+            .json()
+            .then(res => populatePlaylist(res.id))
+            .catch(err => props.setErrors(err));
+    }
+
+    async function populatePlaylist(playlistID) {
+        const token = Cookies.get('spotifyAuthToken'); 
+
+        let uris = state.tracks.map(track => {
+            return 'spotify:track:' + track.id
+        }).join(',');        
+
+        let fetchURL = `https://api.spotify.com/v1/playlists/${playlistID}/tracks?uris=${uris}`
+
+        const res = await fetch(fetchURL, {
+            method: 'POST',
+            headers: {
+                "Content-Type":"application/json", 
+                "Authorization": "Bearer " + token
+            }
+        });
+        
+        res
+            .json()
+            .then()
+            .catch();
+    }
     
     function buildPlaylist() {
         fetchRecommended(
@@ -61,7 +105,7 @@ function FinishButtons(props) {
     }
 
     function savePlaylist() {
-        console.log('saving playlist...');
+        createPlaylist();
     }
 
     return (

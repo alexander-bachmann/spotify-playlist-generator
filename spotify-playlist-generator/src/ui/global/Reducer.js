@@ -10,7 +10,7 @@ const Reducer = (state, action) => {
             return {
                 ...state,
                 user_id: action.payload
-            }
+            };
 
         default: 
             return state;
