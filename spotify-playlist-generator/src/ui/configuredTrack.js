@@ -47,17 +47,14 @@ const ConfiguredTrack = props => {
     
     const [state, dispatch] = useContext(Context);
     const [title, setTitle] = useState('.');
-    const [UID, setUID] = useState(props.UID);
 
     useEffect(() => {
-        // if(state.tracks.length > 0) {
-            let trackData = state.tracks.filter(track => track.uid === UID);
-
-            if(trackData[0] != undefined) {
-                setTitle(trackData[0].title + ' - ' + trackData[0].artist);
-            }
-        // }
-    }, [state])
+        let trackData = state.tracks.filter(track => track.uid == props.UID);
+        
+        if(trackData[0] != undefined) {
+            setTitle(trackData[0].title + ' - ' + trackData[0].artist);
+        }
+    }, [state.tracks, state.tracks.length])
     
     function updateTrackConfiguration() {
         console.log('changing track criteria...');
@@ -68,11 +65,11 @@ const ConfiguredTrack = props => {
     }
 
     function deleteTrack() {
-        props.deleteTrack(UID);
+        props.deleteTrack(props.UID);
     }
     
     return(
-        <div name={UID} className={classes.root}>
+        <div name={props.UID} className={classes.root}>
             <span className={classes.trackTitle}>{title}</span>
             
             <IconButton 
