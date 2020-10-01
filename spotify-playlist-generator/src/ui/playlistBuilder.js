@@ -12,13 +12,13 @@ import { Context } from './global/Store';
 
 function PlaylistBuilder(props) {
     const isMount = useIsMount();
-    // const [count, setCount] = useState(0);
     const [state, dispatch] = useContext(Context);
     // UI
     const [playlistTitle, setPlaylistTitle] =useState('');
     const [spotifyURI, setSpotifyURI] = useState('');
     const [tracks, setTracks] = useState([]);
     // API Data
+    const [fetchedUserData, setFetchedUserData] = useState({});
     const [fetchedRecommended, setFetchedRecommended] = useState({});
     const [trackIDs, setTrackIDs] = useState([]);
     const [fetchedTitles, setFetchedTitles] = useState([]);
@@ -64,7 +64,6 @@ function PlaylistBuilder(props) {
             'https://api.spotify.com/v1/audio-features?', 
             'ids=', 
             trackIDs);
-
     }, [trackIDs])
 
     // On retrieval of track features, compare against user's playlist criteria
@@ -199,6 +198,35 @@ function PlaylistBuilder(props) {
                 } else { return false; }
             } else { return false; }
         } else { return false; }
+    }
+
+    // On render, grab spotify user's profile data (for username)
+    useEffect(() => {
+        fetchUserData('https://api.spotify.com/v1/me');
+    }, []);
+
+    // On retrieval of spotify user's profile data, update the global state
+    useEffect(() => {
+        if(fetchedUserData) {
+            dispatch({ type: 'UPDATE_USER_ID', payload: fetchedUserData.id });
+        }
+    }, [fetchedUserData])
+
+    async function fetchUserData(endpointURL) {
+        const token = Cookies.get('spotifyAuthToken'); 
+        
+        const res = await fetch(endpointURL, {
+            method: 'GET',
+            headers: {
+                "Content-Type":"application/json", 
+                "Authorization": "Bearer " + token
+            }
+        });
+        
+        res
+            .json()
+            .then(res => setFetchedUserData(res))
+            .catch(err => setErrors(err));
     }
     
     async function fetchFeatures(endpointURL, queryParam, query) {

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button'
 import Cookies from 'js-cookie'
+import { Context } from './global/Store';
 
 const useStyles = makeStyles({
     root: {
@@ -29,6 +30,8 @@ const useStyles = makeStyles({
 function FinishButtons(props) {
     const classes = useStyles();
     
+    const [state, dispatch] = useContext(Context);
+    
     async function fetchRecommended(endpointURL, queryParam, query) {
         const token = Cookies.get('spotifyAuthToken'); 
         
@@ -47,6 +50,8 @@ function FinishButtons(props) {
             .then(res => props.setFetchedRecommended(res.tracks))
             .catch(err => props.setErrors(err));
     }
+
+    
     
     function buildPlaylist() {
         fetchRecommended(

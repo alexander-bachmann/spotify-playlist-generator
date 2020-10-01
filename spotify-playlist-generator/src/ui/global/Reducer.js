@@ -5,6 +5,12 @@ const Reducer = (state, action) => {
                 ...state,
                 tracks: action.payload
             };
+        
+        case 'UPDATE_USER_ID':
+            return {
+                ...state,
+                user_id: action.payload
+            }
 
         default: 
             return state;
