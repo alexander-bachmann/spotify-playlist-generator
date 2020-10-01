@@ -225,6 +225,7 @@ function PlaylistBuilder(props) {
             <ConfiguredTrack 
                 UID={UID}
                 deleteTrack={deleteTrack}
+                clearTrack={clearTrack}
             />]);
     }
 
@@ -233,6 +234,28 @@ function PlaylistBuilder(props) {
             track => track.uid !== UID));
         setTracks(tracks => tracks.filter(
             track => track.props.UID !== UID));
+    }
+
+    function clearTrack(UID) {
+
+        // let playlistJSON = [...playlistTracksJSON];
+
+        // console.log(playlistTracksJSON); 
+
+        // setPlaylistTracksJSON(tracks => tracks.map(
+        //     track => (track.id === UID ? {...track, title} : track)))
+
+        // setPlaylistTracksJSON()
+
+        // playlistJSON[playlistJSON.findIndex(track => track.uid == UID)]
+
+        // console.log(playlistJSON);
+        // console.log(playlistJSON.findIndex(track => track.uid == UID))
+        // console.log(playlistJSON[playlistJSON.findIndex(track => track.uid == UID)]);
+
+        // setPlaylistTracksJSON(playlistJSON);
+        // setPlaylistTracksJSON(tracks => tracks.filter(
+            // track => track.uid !== UID));
     }
 
     return (

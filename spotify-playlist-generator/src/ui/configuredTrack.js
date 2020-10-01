@@ -61,7 +61,7 @@ const ConfiguredTrack = props => {
     }
 
     function clearFetchedTrack() {
-        console.log('clearing fetched track...');
+        props.clearTrack(props.UID);
     }
 
     function deleteTrack() {
