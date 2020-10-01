@@ -1,9 +1,9 @@
-import React, { useState, forwardRef, useImperativeHandle }from 'react';
+import React, { useState, useEffect, useContext }from 'react';
 import { makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { useIsMount } from './useIsMount';
+import { Context } from './Store';
 
 const useStyles = makeStyles({
     root: {
@@ -33,25 +33,20 @@ const useStyles = makeStyles({
     }
 })
 
-// function ConfiguredTrack(props) {
-const ConfiguredTrack = forwardRef((props, ref) => {
+const ConfiguredTrack = props => {
     const classes = useStyles();
-
-    const [title, setTitle] = useState('.');
-
-    const updateTitle = (newTitle) => {
-        setTitle(newTitle);
-    };
-
-    useImperativeHandle(ref, () => {
-        return {
-            updateTitle: updateTitle
-        };
-    });
-
     
+    const [state, dispatch] = useContext(Context);
+    const [title, setTitle] = useState(state.count);
 
-
+    useEffect(() => {
+        if(state.tracks[props.count]) {
+            setTitle(state.tracks[props.count].title + ' - ' + 
+                state.tracks[props.count].artist);
+            console.log(state.tracks[props.count].title);
+        }
+    }, [state])
+    
     function changeTrack() {
         console.log('changing track...');
     }
@@ -84,7 +79,6 @@ const ConfiguredTrack = forwardRef((props, ref) => {
             ><SettingsIcon/></IconButton>
         </div>
     )
-});
-// };
+};
 
 export default ConfiguredTrack;

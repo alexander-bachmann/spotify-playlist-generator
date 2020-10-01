@@ -69,7 +69,10 @@ function TrackConfiguration(props) {
         //     "Track " + `${props.count + 1}`]);
         // props.setPlaylistArtists(playlistArtists => [...playlistArtists,
         //     "Artist " + `${props.count + 1}`]);
-        props.setCount(count => count + 1);
+        // props.setCount(count => count + 1);
+
+        props.addTrack(UID);
+
         
         props.setPlaylistTracksJSON( 
             trackFeatures => [...trackFeatures, {
@@ -92,19 +95,19 @@ function TrackConfiguration(props) {
                 }
             ]);
 
-        props.setTracks( tracks => [...tracks, 
-            <ConfiguredTrack 
-                // trackTitle={trackTitles}
-                ref={props.ref}
-                trackTitle={props.playlistTracksJSON.filter(track => track.uid !== UID)}
-                setTracks={props.setTracks}
-                count={props.count}
-                setCount={props.setCount}
+        // props.setTracks( tracks => [...tracks, 
+        //     <ConfiguredTrack 
+        //         // trackTitle={trackTitles}
+        //         ref={props.ref}
+        //         trackTitle={props.playlistTracksJSON.filter(track => track.uid !== UID)}
+        //         setTracks={props.setTracks}
+        //         count={props.count}
+        //         setCount={props.setCount}
 
-                // playlistTitles={props.playlistTitles}
-                setPlaylistTracksJSON={props.setPlaylistTracksJSON}
-                UID={UID}
-            />]);
+        //         // playlistTitles={props.playlistTitles}
+        //         setPlaylistTracksJSON={props.setPlaylistTracksJSON}
+        //         UID={UID}
+        //     />]);
 
         
         
@@ -117,6 +120,7 @@ function TrackConfiguration(props) {
     return (
         <div>
             <div className={classes.root}>
+
                 <span className={classes.trackTitle}>{props.trackTitle}</span>
                 
                 {/* <IconButton 

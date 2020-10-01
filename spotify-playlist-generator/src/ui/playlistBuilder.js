@@ -1,16 +1,20 @@
-import React, { useState, useEffect, useRef }from 'react';
+import React, { useState, useEffect, useContext }from 'react';
 import TextInputField from './textInputField';
 import TrackConfiguration from './trackConfiguration';
 import ConfiguredTracks from './configuredTracks';
 import FinishButtons from './finishButtons';
+import ConfiguredTrack from './configuredTrack';
 import Cookies from 'js-cookie';
 import { useIsMount } from './useIsMount';
+import nextId from 'react-id-generator';
+import { Context } from './Store';
 
 // 4frXpPxQQZwbCu3eTGnZEw - Thundercat
 
 function PlaylistBuilder(props) {
     const isMount = useIsMount();
     const [count, setCount] = useState(0);
+    const [state, dispatch] = useContext(Context);
     // UI
     const [playlistTitle, setPlaylistTitle] =useState('');
     const [spotifyURI, setSpotifyURI] = useState('');
@@ -25,14 +29,6 @@ function PlaylistBuilder(props) {
     // User Playlist
     const [playlistTracksJSON, setPlaylistTracksJSON] = useState([]);
     const [playlistIDs, setPlaylistIDs] = useState([]);
-    // const [playlistTitles, setPlaylistTitles] = useState([]);
-    // const [playlistArtists, setPlaylistArtists] = useState([]);
-
-    const ref = useRef(null);
-        
-    const updateTrackTitle = () => {
-        ref.current.updateTitle('test1');
-    }
 
     // On retrieval of recommended tracks, extract track IDs, titles, and artists
     useEffect(() => {
@@ -127,16 +123,11 @@ function PlaylistBuilder(props) {
         }
     }, [fetchedFeatures]);
 
+    // On update of playlistTracksJSON, update the global state
     useEffect(() => {
-        console.log('playlistTracksJSON updated');
-
-        let playlistJSON = [...playlistTracksJSON];
-
-        // TODO refs broken
-        // updateTrackTitle('test');
-        
-        console.log(tracks);
-
+        if(playlistTracksJSON) {
+            dispatch({ type: 'UPDATE_TRACKS', payload: playlistTracksJSON });
+        }
     }, [playlistTracksJSON]);
 
     function isValidTrack(playlistTrack, fetchedTrack) {
@@ -241,11 +232,18 @@ function PlaylistBuilder(props) {
             .catch(err => setErrors(err));
     }
 
+    function addTrack(UID) {
+        setCount(count => count + 1);
+        setTracks( tracks => [...tracks, 
+            <ConfiguredTrack 
+                UID={UID}
+                count={count}
+                setCount={setCount}
+                setTracks={setTracks}
+                setPlaylistTracksJSON={setPlaylistTracksJSON}
+            />]);
+    }
 
-    
-
-    
-    
     return (
         <div>
             <TextInputField 
@@ -269,21 +267,16 @@ function PlaylistBuilder(props) {
            
             <ConfiguredTracks 
                 tracks={tracks}
-                count={count}
             />
 
             <TrackConfiguration 
-                ref={ref}
+                addTrack={addTrack}
                 trackTitle={"Track " + `${count + 1}`}
-                setTracks={setTracks}
+                // setTracks={setTracks}
                 playlistTracksJSON={playlistTracksJSON}
                 setPlaylistTracksJSON={setPlaylistTracksJSON}
                 count={count}
                 setCount={setCount}
-                // playlistTitles={playlistTitles}
-                // setPlaylistTitles={setPlaylistTitles}
-                // playlistArtists={playlistArtists}
-                // setPlaylistArtists={setPlaylistArtists}
             />
         </div>
     );
