@@ -1,7 +1,7 @@
 # Spotify Playlist Generator:
 
 ## About:
-Client-side website that allows users to define a playlist template. Track by track, users define acceptable feature value ranges. Track features users can specify include, but are not limited to, Danceability, Tempo, and Duration. Upon defining the playlist template, API calls are made to Spotify to retrieve recommended tracks, populate the user-defined playlist template (staying within the bounds of the users track criteria specifications), then add the generated playlist to the user's Spotify account. </br>
+Client-side React app that allows users to define a playlist template. Track by track, users define acceptable feature value ranges. Track features users can specify include, but are not limited to, Danceability, Tempo, and Duration. Upon defining the playlist template, API calls are made to Spotify to retrieve recommended tracks, populate the user-defined playlist template (staying within the bounds of the users track criteria specifications), then add the generated playlist to the user's Spotify account. </br>
 
 ## Tutorial:
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=uhjQd3Il78A
