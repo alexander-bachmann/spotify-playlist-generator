@@ -8,7 +8,7 @@ Client-side React app that allows users to define a playlist template. Track by 
 " target="_blank"><img src="http://img.youtube.com/vi/uhjQd3Il78A/0.jpg" 
 alt="Spotify playlist generator tutorial" width="580" height="360" border="15" /></a>
 
-## Running:
+## Installation and Execution:
 ```
 $ cd spotify-playlist-generator
 $ yarn install
